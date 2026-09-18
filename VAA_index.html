@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA — Workforce & Marketplace</title>
+<meta name="description" content="VAA connects customers, workers, professionals, shops and suppliers for workforce, services and building supplies.">
+<meta name="keywords" content="VAA Workforce, workers, electrician, plumber, mistri, labour, construction, building materials, Karnal">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0b1117">
+<meta property="og:title" content="VAA — Workforce & Marketplace">
+<meta property="og:description" content="Find workforce, post requirements and connect with local service professionals and suppliers.">
+<link rel="canonical" href="https://vikassharma01072008-prog.github.io/VAA-enterprises-/">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f5f6f8;color:#111820}a{text-decoration:none;color:inherit}
+:root{--yellow:#ffd400;--dark:#0b1117;--dark2:#141c25;--muted:#687382;--line:#e2e6eb;--white:#fff;--green:#18a66a}
+.container{width:min(1180px,92%);margin:auto}
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,17,23,.97);color:white;border-bottom:1px solid #252d36}.navin{height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:29px;font-weight:950;letter-spacing:-2px}.brand i{color:var(--yellow);font-style:normal}.brand small{display:block;font-size:8px;letter-spacing:2px;color:#9da7b2;margin-top:-4px}
+.navlinks{display:flex;align-items:center;gap:20px;font-size:13px;font-weight:800}.navlinks a:hover{color:var(--yellow)}.login{border:1px solid #56606c;padding:10px 14px;border-radius:10px}
+.hero{background:var(--dark);color:white;padding:42px 0 60px}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}.eyebrow{display:inline-block;border:1px solid #303944;background:#171f28;border-radius:99px;padding:8px 12px;font-size:11px;font-weight:800;letter-spacing:.6px}.hero h1{font-size:clamp(44px,6vw,72px);line-height:.95;letter-spacing:-4px;margin:18px 0}.hero h1 span{color:var(--yellow)}.hero p{font-size:18px;line-height:1.55;color:#c7ced6;max-width:620px}.chips{display:flex;gap:9px;flex-wrap:wrap;margin:23px 0}.chip{padding:8px 11px;background:#1a232d;border:1px solid #303944;border-radius:99px;font-size:12px;font-weight:800}.heroimg{width:100%;display:block;border-radius:20px;border:1px solid #303944}.btn{border:0;border-radius:11px;padding:13px 18px;font-weight:900;cursor:pointer;display:inline-block}.primary{background:var(--yellow);color:#101010}.darkbtn{background:#17202a;color:white;border:1px solid #3b4652}.outline{background:transparent;color:white;border:1px solid #596571;margin-left:7px}
+section{padding:66px 0}.section-title{font-size:36px;letter-spacing:-1.5px;margin:0 0 9px}.section-sub{color:var(--muted);max-width:720px;line-height:1.55}.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}.role,.card{background:white;border:1px solid var(--line);border-radius:18px;padding:23px}.role .emoji{font-size:31px}.role h3{margin:13px 0 6px}.role p{color:var(--muted);font-size:14px;min-height:44px;line-height:1.45}.role .btn{width:100%;margin-top:9px}
+.services{background:white}.servicegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:27px}.service{padding:19px;border:1px solid var(--line);border-radius:15px;font-weight:850;background:#fff}.service span{display:block;font-size:25px;margin-bottom:8px}
+.howgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.how{background:white;border:1px solid var(--line);border-radius:16px;padding:20px}.how b{font-size:11px;color:#8d97a3}.how h3{margin:9px 0 7px}.how p{font-size:13px;color:var(--muted);line-height:1.5}
+.market{background:#0f171f;color:white}.market .section-sub{color:#aeb8c2}.marketgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:25px}.market .card{background:#17212b;border-color:#2a3540}.market .card p,.market small{color:#aeb8c2}
+.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:28px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.full{grid-column:1/-1}label{display:block;font-size:12px;font-weight:850;margin-bottom:6px}input,select,textarea{width:100%;padding:12px;border:1px solid #d7dce2;border-radius:9px;background:white;font:inherit}textarea{min-height:95px;resize:vertical}.form-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid var(--line);background:white;padding:10px 13px;border-radius:9px;font-weight:800;cursor:pointer}.tab.active{background:var(--dark);color:var(--yellow);border-color:var(--dark)}
+.dashboard{display:none}.dashgrid{display:grid;grid-template-columns:230px 1fr;gap:16px}.side{background:var(--dark);color:white;border-radius:17px;padding:15px;height:max-content;position:sticky;top:88px}.side button{width:100%;display:block;text-align:left;border:0;background:transparent;color:white;padding:12px;border-radius:9px;cursor:pointer;font-weight:800}.side button.active,.side button:hover{background:#202a35;color:var(--yellow)}.dashmain{background:white;border:1px solid var(--line);border-radius:17px;padding:24px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{border:1px solid var(--line);padding:17px;border-radius:13px}.stat b{display:block;font-size:27px}.stat span{font-size:11px;color:var(--muted)}.dashsection{display:none;margin-top:22px}.dashsection.show{display:block}.list{display:grid;gap:10px}.item{border:1px solid var(--line);border-radius:12px;padding:15px;display:flex;justify-content:space-between;gap:15px;align-items:center}.tag{display:inline-block;background:#eef1f4;padding:5px 8px;border-radius:99px;font-size:10px;font-weight:850;margin-right:5px}.empty{padding:25px;text-align:center;border:1px dashed #cfd5dc;border-radius:12px;color:var(--muted)}
+footer{background:var(--dark);color:#b8c1ca;padding:35px 0}.foot{display:flex;justify-content:space-between;gap:20px}.yellow{color:var(--yellow)}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:200;align-items:center;justify-content:center;padding:18px}.modalbox{background:white;width:min(520px,100%);border-radius:18px;padding:25px;max-height:90vh;overflow:auto}.modalhead{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:#eef1f4;border-radius:9px;padding:8px 11px;cursor:pointer}.toast{position:fixed;right:18px;bottom:18px;background:#111820;color:white;padding:14px 18px;border-radius:10px;display:none;z-index:300;box-shadow:0 12px 35px #0004}
+@media(max-width:850px){.hero-grid,.dashgrid{grid-template-columns:1fr}.roles,.marketgrid{grid-template-columns:1fr}.servicegrid{grid-template-columns:1fr 1fr}.howgrid{grid-template-columns:1fr 1fr}.navlinks a:not(.login){display:none}.side{position:static}.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.servicegrid,.howgrid,.formgrid,.stats{grid-template-columns:1fr}.hero h1{letter-spacing:-2.5px}.outline{margin:8px 0 0}.item{display:block}.foot{display:block}.foot>div+div{margin-top:12px}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="container navin">
+<a class="brand" href="#"><i>V</i>AA<small>WORKFORCE • MARKETPLACE</small></a>
+<nav class="navlinks"><a href="#services">Services</a><a href="#marketplace">Marketplace</a><a href="#how">How it works</a><a href="#register">Join</a><a class="login" href="#" onclick="openLogin();return false">Login</a></nav>
+</div></header>
+
+<header class="hero"><div class="container hero-grid"><div>
+<span class="eyebrow">LOCAL WORKFORCE NETWORK</span>
+<h1>Right people.<br><span>Right work.</span><br>Right time.</h1>
+<p>VAA connects customers with workers and professionals, and connects businesses with workforce and building supplies in one local marketplace.</p>
+<div class="chips"><span class="chip">1–20+ workers</span><span class="chip">Flexible / negotiable rates</span><span class="chip">Services + supplies</span></div>
+<a class="btn primary" href="#register">Join VAA</a>
+<a class="btn outline" href="tel:9671163712">9671163712</a>
+<a class="btn outline" href="tel:7015551866">70155 51866</a>
+</div><img class="heroimg" src="assets/vaa-workforce-banner.png" alt="VAA Workforce services banner"></div></header>
+
+<section id="register"><div class="container">
+<h2 class="section-title">Choose your side of VAA</h2><p class="section-sub">Create a profile, post work, find workers, or list materials.</p>
+<div class="roles">
+<div class="role"><div class="emoji">🏠</div><h3>Customer</h3><p>Post a requirement for labour, skilled work or a project.</p><button class="btn primary" onclick="openRegister('Customer')">Create Customer Account</button></div>
+<div class="role"><div class="emoji">👷</div><h3>Worker / Professional</h3><p>Build a profile with your trade, skills, area and availability.</p><button class="btn primary" onclick="openRegister('Worker')">Join as Worker</button></div>
+<div class="role"><div class="emoji">🏪</div><h3>Shop / Supplier</h3><p>Connect your business and publish products or materials.</p><button class="btn primary" onclick="openRegister('Shop')">Register Business</button></div>
+</div></div></section>
+
+<section class="services" id="services"><div class="container">
+<h2 class="section-title">VAA services & supplies</h2><p class="section-sub">A single network for workforce, skilled professionals and project materials.</p>
+<div class="servicegrid">
+<div class="service"><span>👷</span>General Labour</div><div class="service"><span>🧱</span>Mistri</div><div class="service"><span>⚡</span>Electrician</div><div class="service"><span>🔧</span>Plumber</div>
+<div class="service"><span>🪚</span>Carpenter / Woodwork</div><div class="service"><span>🎨</span>Painter</div><div class="service"><span>📦</span>Loading & Unloading</div><div class="service"><span>🏗️</span>Construction Labour</div>
+<div class="service"><span>🧱</span>Cement & Construction Materials</div><div class="service"><span>🚿</span>Sanitary & Bathroom Supplies</div><div class="service"><span>🪵</span>Wood / Timber & Boards</div><div class="service"><span>🎨</span>Paints & Painting Supplies</div>
+<div class="service"><span>💡</span>Electrical Materials</div><div class="service"><span>🔩</span>Hardware & Fittings</div><div class="service"><span>🔨</span>Tools & Site Supplies</div><div class="service"><span>🏠</span>Other Building Supplies</div>
+</div></div></section>
+
+<section id="how"><div class="container"><h2 class="section-title">How the marketplace works</h2><p class="section-sub">The complete user flow is built into this front-end version and uses browser storage until a real backend is connected.</p>
+<div class="howgrid">
+<div class="how"><b>01</b><h3>Register</h3><p>Create a Customer, Worker or Shop profile.</p></div>
+<div class="how"><b>02</b><h3>Post / List</h3><p>Customers post jobs. Shops list materials. Workers publish availability.</p></div>
+<div class="how"><b>03</b><h3>Match</h3><p>The matching screen filters workers by category and area.</p></div>
+<div class="how"><b>04</b><h3>Connect</h3><p>Call or WhatsApp the relevant contact and coordinate the work.</p></div>
+</div></div></section>
+
+<section class="market" id="marketplace"><div class="container"><h2 class="section-title">Live marketplace</h2><p class="section-sub">Post a requirement or add a material listing. Items created on this device appear here immediately.</p>
+<div class="marketgrid">
+<div class="card"><h3>📋 Need workers?</h3><p>Post category, worker count, location, date, duration and budget.</p><button class="btn primary" onclick="openRequirement()">Post Requirement</button></div>
+<div class="card"><h3>👷 Find professionals</h3><p>Search registered worker profiles and see compatible matches.</p><button class="btn darkbtn" onclick="openLogin()">Open Dashboard</button></div>
+<div class="card"><h3>🏪 Sell / supply materials</h3><p>Add construction, electrical, hardware, sanitary or other supplies.</p><button class="btn darkbtn" onclick="openRegister('Shop')">Add Business</button></div>
+</div></div></section>
+
+<section id="public-listings"><div class="container"><h2 class="section-title">Recent opportunities</h2><p class="section-sub">This section updates from marketplace data stored in this browser.</p><div id="publicJobs" class="list"></div></div></section>
+
+<footer><div class="container foot"><div><b class="yellow">VAA</b> — Skilled Hands | Stronger Tomorrow</div><div>Call <a href="tel:9671163712">9671163712</a> · <a href="tel:7015551866">70155 51866</a> &nbsp;|&nbsp; <a href="https://wa.me/919671163712">WhatsApp</a> · <a href="https://wa.me/917015551866">WhatsApp 2</a></div></div></footer>
+
+<div class="modal" id="modal"><div class="modalbox">
+<div class="modalhead"><h2 id="modalTitle" style="margin:0">Register</h2><button class="close" onclick="closeModal()">✕</button></div>
+<div id="modalBody"></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const CATEGORIES=["General Labour","Mistri","Electrician","Plumber","Carpenter","Painter","Loading & Unloading","Construction Labour","Cement & Construction Materials","Sanitary & Bathroom Supplies","Wood / Timber & Boards","Paints & Painting Supplies","Electrical Materials","Hardware & Fittings","Tools & Site Supplies","Other Building Supplies"];
+let currentRole="Customer", currentUser=null;
+
+function data(key){try{return JSON.parse(localStorage.getItem(key)||"[]")}catch(e){return[]}}
+function save(key,val){localStorage.setItem(key,JSON.stringify(val))}
+function esc(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";setTimeout(()=>t.style.display="none",2600)}
+function showModal(title,body){document.getElementById("modalTitle").textContent=title;document.getElementById("modalBody").innerHTML=body;document.getElementById("modal").style.display="flex"}
+function closeModal(){document.getElementById("modal").style.display="none"}
+
+function categoryOptions(selected="General Labour"){return CATEGORIES.map(c=>`<option ${c===selected?"selected":""}>${esc(c)}</option>`).join("")}
+
+function openRegister(role="Customer"){
+ currentRole=role;
+ showModal("Create "+role+" profile",`
+ <p class="section-sub">Your profile is stored on this device in this front-end version.</p>
+ <form onsubmit="registerUser(event)">
+ <div class="formgrid">
+ <div><label>Name / Contact person</label><input id="name" required></div>
+ <div><label>Phone</label><input id="phone" type="tel" required></div>
+ <div><label>City / Area</label><input id="area" value="Karnal" required></div>
+ <div><label>Role</label><select id="role"><option>Customer</option><option>Worker</option><option>Shop</option></select></div>
+ <div><label>Service / Business category</label><select id="category">${categoryOptions()}</select></div>
+ <div><label>Availability</label><input id="availability" placeholder="e.g. Daily / Mon-Sat"></div>
+ <div class="full"><label>Skills / Business details</label><textarea id="details" placeholder="Experience, skills, business details, etc."></textarea></div>
+ </div><div class="form-actions"><button class="btn primary">Create profile</button><button type="button" class="btn" onclick="closeModal()">Cancel</button></div></form>`);
+ document.getElementById("role").value=role;
+}
+function registerUser(e){
+ e.preventDefault();
+ const u={id:Date.now(),name:document.getElementById("name").value.trim(),phone:document.getElementById("phone").value.trim(),area:document.getElementById("area").value.trim(),role:document.getElementById("role").value,category:document.getElementById("category").value,availability:document.getElementById("availability").value.trim(),details:document.getElementById("details").value.trim(),created:new Date().toISOString()};
+ const users=data("vaa_users");users.push(u);save("vaa_users",users);currentUser=u;closeModal();openDashboard();toast("Profile created. Welcome to VAA!");}
+
+function openRequirement(){
+ showModal("Post a workforce requirement",`
+ <p class="section-sub">Create a job request for workers or professionals.</p>
+ <form onsubmit="saveRequirement(event)"><div class="formgrid">
+ <div><label>Customer / Contact name</label><input id="rqname" value="${esc(currentUser?.name||"")}" required></div>
+ <div><label>Phone</label><input id="rqphone" value="${esc(currentUser?.phone||"")}" type="tel" required></div>
+ <div><label>Work category</label><select id="rqcat">${categoryOptions()}</select></div>
+ <div><label>Workers needed</label><input id="rqcount" type="number" min="1" value="1" required></div>
+ <div><label>Work location</label><input id="rqlocation" value="Karnal" required></div>
+ <div><label>Start date</label><input id="rqdate" type="date"></div>
+ <div><label>Duration / hours</label><input id="rqduration" placeholder="e.g. 5 days / 8 hours"></div>
+ <div><label>Budget / rate</label><input id="rqbudget" placeholder="e.g. Negotiable"></div>
+ <div class="full"><label>Requirement details</label><textarea id="rqdetails" placeholder="Describe the work, skills required, timing, etc."></textarea></div>
+ </div><div class="form-actions"><button class="btn primary">Publish Requirement</button><button type="button" class="btn" onclick="closeModal()">Cancel</button></div></form>`);
+}
+function saveRequirement(e){
+ e.preventDefault();
+ const r={id:Date.now(),name:document.getElementById("rqname").value.trim(),phone:document.getElementById("rqphone").value.trim(),category:document.getElementById("rqcat").value,count:document.getElementById("rqcount").value,location:document.getElementById("rqlocation").value.trim(),date:document.getElementById("rqdate").value,duration:document.getElementById("rqduration").value.trim(),budget:document.getElementById("rqbudget").value.trim(),details:document.getElementById("rqdetails").value.trim(),status:"Open",created:new Date().toISOString()};
+ const jobs=data("vaa_jobs");jobs.push(r);save("vaa_jobs",jobs);closeModal();renderPublicJobs();if(currentUser)openDashboard("requests");toast("Requirement published.");}
+
+function openShopListing(){
+ showModal("Add material listing",`
+ <form onsubmit="saveListing(event)"><div class="formgrid">
+ <div><label>Business / Contact</label><input id="ln" value="${esc(currentUser?.name||"")}" required></div>
+ <div><label>Phone</label><input id="lp" value="${esc(currentUser?.phone||"")}" required></div>
+ <div><label>Material category</label><select id="lc">${categoryOptions("Cement & Construction Materials")}</select></div>
+ <div><label>Product / Material</label><input id="lproduct" placeholder="e.g. Cement, wire, plywood" required></div>
+ <div><label>Price / Unit</label><input id="lprice" placeholder="e.g. ₹420 / bag"></div>
+ <div><label>Area</label><input id="larea" value="Karnal"></div>
+ <div class="full"><label>Details</label><textarea id="ldetails" placeholder="Brand, stock, delivery, minimum order, etc."></textarea></div>
+ </div><div class="form-actions"><button class="btn primary">Publish Listing</button></div></form>`);
+}
+function saveListing(e){
+ e.preventDefault();const l={id:Date.now(),name:document.getElementById("ln").value.trim(),phone:document.getElementById("lp").value.trim(),category:document.getElementById("lc").value,product:document.getElementById("lproduct").value.trim(),price:document.getElementById("lprice").value.trim(),area:document.getElementById("larea").value.trim(),details:document.getElementById("ldetails").value.trim(),created:new Date().toISOString()};
+ const ls=data("vaa_listings");ls.push(l);save("vaa_listings",ls);closeModal();toast("Material listing published.");if(currentUser)openDashboard("listings");}
+
+function openLogin(){
+ showModal("VAA Login",`<p class="section-sub">Demo login for this front-end: enter the phone used when creating a profile.</p><form onsubmit="loginUser(event)"><label>Phone number</label><input id="loginphone" type="tel" required><div class="form-actions"><button class="btn primary">Login</button><button type="button" class="btn" onclick="closeModal()">Cancel</button></div></form><p class="note">For production, replace this device-only login with secure OTP/authentication and a real database.</p>`);
+}
+function loginUser(e){e.preventDefault();const p=document.getElementById("loginphone").value.trim();const u=data("vaa_users").find(x=>x.phone===p);if(!u){toast("No profile found on this device.");return}currentUser=u;closeModal();openDashboard();toast("Welcome back, "+u.name+"!");}
+
+function openDashboard(section="overview"){
+ document.getElementById("dashboard").style.display="block";document.getElementById("dashboard").scrollIntoView({behavior:"smooth"});
+ document.getElementById("dashhello").textContent=currentUser?"Welcome, "+currentUser.name:"VAA Dashboard";
+ document.getElementById("dashrole").textContent=currentUser?currentUser.role+" • "+currentUser.category+" • "+currentUser.area:"Marketplace dashboard";
+ renderDashboard();showDash(section);
+}
+function renderDashboard(){
+ const users=data("vaa_users"),jobs=data("vaa_jobs"),ls=data("vaa_listings");
+ document.getElementById("sUsers").textContent=users.length;document.getElementById("sJobs").textContent=jobs.length;document.getElementById("sListings").textContent=ls.length;
+ document.getElementById("sMatches").textContent=currentUser&&currentUser.role==="Worker"?jobs.filter(j=>j.category===currentUser.category).length:users.filter(u=>u.role==="Worker").length;
+ document.getElementById("profileBox").innerHTML=currentUser?`<div class="item"><div><b>${esc(currentUser.name)}</b><br><small>${esc(currentUser.phone)} • ${esc(currentUser.area)}</small><br><span class="tag">${esc(currentUser.role)}</span><span class="tag">${esc(currentUser.category)}</span></div><button class="btn darkbtn" onclick="openRegister('${esc(currentUser.role)}')">Edit / New Profile</button></div>`:`<div class="empty">Create or log into a profile first.</div>`;
+ document.getElementById("jobsBox").innerHTML=jobs.length?jobs.slice().reverse().map(j=>`<div class="item"><div><b>${esc(j.category)}</b> — ${esc(j.count)} worker(s)<br><small>${esc(j.location)} • ${esc(j.duration||"Duration not set")} • ${esc(j.budget||"Rate negotiable")}</small><br><span class="tag">${esc(j.status)}</span></div><a class="btn primary" href="tel:${esc(j.phone)}">Contact</a></div>`).join(""):`<div class="empty">No requirements yet.</div>`;
+ document.getElementById("listingsBox").innerHTML=ls.length?ls.slice().reverse().map(l=>`<div class="item"><div><b>${esc(l.product)}</b><br><small>${esc(l.category)} • ${esc(l.area)} • ${esc(l.price||"Price on enquiry")}</small></div><a class="btn primary" href="tel:${esc(l.phone)}">Contact</a></div>`).join(""):`<div class="empty">No material listings yet.</div>`;
+ const workers=users.filter(u=>u.role==="Worker");document.getElementById("matchesBox").innerHTML=workers.length?workers.map(w=>`<div class="item"><div><b>${esc(w.name)}</b><br><small>${esc(w.category)} • ${esc(w.area)} • ${esc(w.availability||"Availability not set")}</small><br><span class="tag">${esc(w.details||"Professional")}</span></div><a class="btn primary" href="tel:${esc(w.phone)}">Contact</a></div>`).join(""):`<div class="empty">No worker profiles yet.</div>`;
+}
+function showDash(id){
+ document.querySelectorAll(".dashsection").forEach(x=>x.classList.remove("show"));document.getElementById("d-"+id).classList.add("show");
+ document.querySelectorAll(".side button").forEach(x=>x.classList.remove("active"));const b=document.querySelector('.side button[data-section="'+id+'"]');if(b)b.classList.add("active");
+}
+function renderPublicJobs(){const jobs=data("vaa_jobs");document.getElementById("publicJobs").innerHTML=jobs.length?jobs.slice().reverse().slice(0,8).map(j=>`<div class="item"><div><b>${esc(j.category)}</b> — ${esc(j.count)} worker(s)<br><small>${esc(j.location)} • ${esc(j.duration||"Flexible")} • ${esc(j.budget||"Negotiable")}</small></div><a class="btn primary" href="tel:${esc(j.phone)}">Contact</a></div>`).join(""):`<div class="empty">No public requirements yet. Be the first to post one.</div>`}
+
+window.addEventListener("load",()=>{renderPublicJobs();document.querySelectorAll(".side button").forEach(b=>b.onclick=()=>showDash(b.dataset.section));});
+</script>
+
+<section class="dashboard" id="dashboard"><div class="container dashgrid">
+<aside class="side"><b>VAA DASHBOARD</b><p style="font-size:11px;color:#9da7b2">Marketplace control centre</p>
+<button data-section="overview" class="active">Overview</button><button data-section="profile">My Profile</button><button data-section="requests">Requirements</button><button data-section="matches">Matches / Workers</button><button data-section="listings">Material Listings</button><button onclick="openRequirement()">+ Post Requirement</button><button onclick="openShopListing()">+ Add Material</button>
+</aside>
+<main class="dashmain"><h2 id="dashhello" style="margin:0 0 5px">VAA Dashboard</h2><p id="dashrole" class="section-sub"></p>
+<div class="stats"><div class="stat"><b id="sUsers">0</b><span>Profiles</span></div><div class="stat"><b id="sJobs">0</b><span>Requirements</span></div><div class="stat"><b id="sListings">0</b><span>Listings</span></div><div class="stat"><b id="sMatches">0</b><span>Matches</span></div></div>
+<div class="dashsection show" id="d-overview"><div class="card" style="margin-top:20px"><h3>Quick actions</h3><div class="form-actions"><button class="btn primary" onclick="openRequirement()">Post Requirement</button><button class="btn darkbtn" onclick="openShopListing()">Add Material Listing</button><button class="btn" onclick="openRegister(currentUser?.role||'Worker')">Create / Edit Profile</button></div></div></div>
+<div class="dashsection" id="d-profile"><h3>My Profile</h3><div id="profileBox"></div></div>
+<div class="dashsection" id="d-requests"><h3>Work Requirements</h3><div id="jobsBox" class="list"></div></div>
+<div class="dashsection" id="d-matches"><h3>Worker Matching</h3><p class="section-sub">Workers are surfaced by category and area from profiles stored on this device.</p><div id="matchesBox" class="list"></div></div>
+<div class="dashsection" id="d-listings"><h3>Material Listings</h3><div id="listingsBox" class="list"></div></div>
+</main></div></section>
+
+<script>renderDashboard();</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA — Commission & Earnings</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f6f8;color:#111820}
+:root{--yellow:#ffd400;--dark:#0b1117;--line:#e2e6eb;--muted:#687382}
+.container{width:min(900px,92%);margin:auto}header{background:var(--dark);color:white;padding:22px 0}
+.brand{font-size:30px;font-weight:900;letter-spacing:-2px}.brand span{color:var(--yellow)}
+.small{font-size:9px;letter-spacing:2px;color:#9da7b2}.back{display:inline-block;color:white;text-decoration:none;margin-top:14px}
+.card{background:white;border:1px solid var(--line);border-radius:18px;padding:22px;margin:20px 0}
+h1{font-size:38px;margin:35px 0 8px}.sub{color:var(--muted);line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+input{width:100%;padding:13px;border:1px solid #d7dce2;border-radius:10px;font:inherit}
+label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}
+button{border:0;border-radius:10px;padding:13px 18px;font-weight:900;cursor:pointer;background:var(--yellow)}
+.result{background:#f7f8fa;border-radius:12px;padding:16px;margin-top:15px;line-height:1.8}.big{font-size:25px;font-weight:900}
+@media(max-width:650px){.grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style>
+</head>
+<body>
+<header><div class="container">
+<div class="brand"><span>V</span>AA</div>
+<div class="small">WORKFORCE • MARKETPLACE</div>
+<a class="back" href="index.html">← Back to VAA Website</a>
+</div></header>
+<main class="container">
+<h1>VAA Commission & Earnings</h1>
+<p class="sub">Manage commission percentages and calculate the money flow for customers, workers and shops/suppliers.</p>
+
+<div class="card"><h2>Commission Settings</h2>
+<p class="sub">Default: Customer 4%, Worker 2%, Shop/Supplier 6%.</p>
+<div class="grid">
+<div><label>Customer Commission %</label><input id="customerRate" type="number" min="0" max="100" step="0.1" value="4"></div>
+<div><label>Worker Commission %</label><input id="workerRate" type="number" min="0" max="100" step="0.1" value="2"></div>
+<div><label>Shop / Supplier Commission %</label><input id="supplierRate" type="number" min="0" max="100" step="0.1" value="6"></div>
+</div><br><button onclick="saveRates()">Save Commission Rates</button></div>
+
+<div class="card"><h2>Customer Job Calculator</h2><label>Job Amount (₹)</label><input id="jobAmount" type="number" min="0" placeholder="10000" oninput="calculateJob()"><div class="result" id="jobResult">Enter an amount.</div></div>
+
+<div class="card"><h2>Worker Payout Calculator</h2><label>Worker Job Amount (₹)</label><input id="workerAmount" type="number" min="0" placeholder="10000" oninput="calculateWorker()"><div class="result" id="workerResult">Enter an amount.</div></div>
+
+<div class="card"><h2>Shop / Supplier Calculator</h2><label>Sale Amount (₹)</label><input id="supplierAmount" type="number" min="0" placeholder="10000" oninput="calculateSupplier()"><div class="result" id="supplierResult">Enter an amount.</div></div>
+
+<div class="card"><h2>VAA Earnings Summary</h2><div class="result" id="summary">No amounts entered yet.</div></div>
+</main>
+<script>
+function loadRates(){const s=localStorage.getItem("vaa_commission");if(s){try{const x=JSON.parse(s);customerRate.value=x.customer;workerRate.value=x.worker;supplierRate.value=x.supplier}catch(e){}}}
+function saveRates(){localStorage.setItem("vaa_commission",JSON.stringify({customer:Number(customerRate.value)||0,worker:Number(workerRate.value)||0,supplier:Number(supplierRate.value)||0}));calculateJob();calculateWorker();calculateSupplier();alert("VAA commission rates saved.");}
+function money(n){return "₹"+Number(n||0).toFixed(2)}
+function rates(){return{customer:Number(customerRate.value)||0,worker:Number(workerRate.value)||0,supplier:Number(supplierRate.value)||0}}
+function calculateJob(){const a=Number(jobAmount.value)||0,r=rates().customer,f=a*r/100;jobResult.innerHTML="Job amount: <b>"+money(a)+"</b><br>VAA customer fee ("+r+"%): <b>"+money(f)+"</b><br><span class='big'>Customer total: "+money(a+f)+"</span>";summary()}
+function calculateWorker(){const a=Number(workerAmount.value)||0,r=rates().worker,f=a*r/100;workerResult.innerHTML="Job amount: <b>"+money(a)+"</b><br>VAA worker commission ("+r+"%): <b>"+money(f)+"</b><br><span class='big'>Worker payout: "+money(a-f)+"</span>";summary()}
+function calculateSupplier(){const a=Number(supplierAmount.value)||0,r=rates().supplier,f=a*r/100;supplierResult.innerHTML="Sale amount: <b>"+money(a)+"</b><br>VAA supplier commission ("+r+"%): <b>"+money(f)+"</b><br><span class='big'>Supplier payout: "+money(a-f)+"</span>";summary()}
+function summary(){const r=rates(),cf=(Number(jobAmount.value)||0)*r.customer/100,wf=(Number(workerAmount.value)||0)*r.worker/100,sf=(Number(supplierAmount.value)||0)*r.supplier/100;summaryEl=document.getElementById("summary");summaryEl.innerHTML="Customer VAA fee: <b>"+money(cf)+"</b><br>Worker VAA commission: <b>"+money(wf)+"</b><br>Supplier VAA commission: <b>"+money(sf)+"</b><hr><span class='big'>Total VAA earnings: "+money(cf+wf+sf)+"</span>"}
+loadRates();
+</script>
+</body></html>

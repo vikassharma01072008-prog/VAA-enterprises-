@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA — Local Workforce & Services</title>
+<meta name="description" content="VAA connects customers, local workers, shops and suppliers for workforce, services and building supplies.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f7f9;color:#121820}a{text-decoration:none;color:inherit}
+:root{--yellow:#ffd400;--dark:#0b1117;--muted:#697386;--line:#e5e7eb;--white:#fff}
+.container{width:min(1180px,92%);margin:auto}.nav{background:var(--dark);color:white;position:sticky;top:0;z-index:50;border-bottom:1px solid #222}.navin{height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:29px;font-weight:900;letter-spacing:-2px}.brand i{color:var(--yellow);font-style:normal}.brand small{display:block;font-size:8px;letter-spacing:2px;color:#cbd0d6;margin-top:-4px}.navlinks{display:flex;gap:22px;align-items:center;font-size:14px;font-weight:700}.navlinks a:hover{color:var(--yellow)}.login{padding:10px 15px;border:1px solid #59616b;border-radius:10px}
+.hero{background:var(--dark);color:white;padding:38px 0 55px}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}.hero h1{font-size:clamp(43px,6vw,68px);line-height:.98;letter-spacing:-3px;margin:8px 0 18px}.hero h1 span{color:var(--yellow)}.hero p{color:#c8ced6;font-size:18px;max-width:590px}.badges{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}.badge{background:#1a222c;border:1px solid #303944;padding:8px 11px;border-radius:99px;font-size:12px}.heroimg{width:100%;border-radius:18px;border:1px solid #303944;display:block}.btn{display:inline-block;border:0;border-radius:11px;padding:13px 18px;font-weight:800;cursor:pointer}.primary{background:var(--yellow);color:#111}.outline{border:1px solid #66707c;color:white;background:transparent;margin-left:8px}
+section{padding:64px 0}.section-title{font-size:36px;letter-spacing:-1.5px;margin:0 0 10px}.section-sub{color:var(--muted);max-width:650px}.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}.role{background:white;border:1px solid var(--line);border-radius:18px;padding:25px}.role .emoji{font-size:32px}.role h3{margin:14px 0 7px}.role p{color:var(--muted);font-size:14px;min-height:43px}.role button{width:100%;margin-top:10px}
+.services{background:white}.servicegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}.service{padding:20px;border:1px solid var(--line);border-radius:15px;font-weight:800;background:#fff}.service span{display:block;font-size:25px;margin-bottom:9px}
+.howgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.how{background:white;border:1px solid var(--line);padding:20px;border-radius:15px}.how b{font-size:12px;color:#9aa1ab}.how h3{margin:9px 0}.how p{font-size:13px;color:var(--muted)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.full{grid-column:1/-1}label{font-size:12px;font-weight:800;display:block;margin:0 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid #d9dde4;border-radius:9px;background:#fff;font:inherit}textarea{min-height:95px}.form-actions{margin-top:16px;display:flex;gap:10px;align-items:center}.note{font-size:12px;color:var(--muted)}
+.dashboard{display:none}.dashgrid{display:grid;grid-template-columns:240px 1fr;gap:16px}.side{background:#0d141b;color:white;border-radius:16px;padding:15px}.side button{display:block;width:100%;text-align:left;background:transparent;color:white;border:0;padding:12px;border-radius:8px;margin-bottom:5px;cursor:pointer}.side button.active,.side button:hover{background:#202b37;color:var(--yellow)}.dashmain{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{border:1px solid var(--line);padding:18px;border-radius:13px}.stat b{font-size:27px;display:block}.stat span{color:var(--muted);font-size:12px}.listing{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}.job{border:1px solid var(--line);border-radius:12px;padding:15px;margin-bottom:10px;display:flex;justify-content:space-between;gap:15px;align-items:center}.job small{color:var(--muted)}.tag{background:#eef1f4;padding:5px 8px;border-radius:99px;font-size:11px;font-weight:800}
+footer{background:var(--dark);color:#b8c0c9;padding:34px 0}.foot{display:flex;justify-content:space-between;gap:20px}.yellow{color:var(--yellow)}
+.toast{position:fixed;right:18px;bottom:18px;background:#111820;color:white;padding:14px 18px;border-radius:10px;display:none;z-index:100;box-shadow:0 10px 30px #0003}
+@media(max-width:850px){.hero-grid,.dashgrid{grid-template-columns:1fr}.roles{grid-template-columns:1fr}.servicegrid{grid-template-columns:1fr 1fr}.howgrid{grid-template-columns:1fr 1fr}.navlinks a:not(.login){display:none}}
+@media(max-width:560px){.formgrid{grid-template-columns:1fr}.servicegrid,.howgrid{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.job{display:block}.outline{margin-left:0;margin-top:8px}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="container navin">
+<a class="brand" href="#"><i>V</i>AA<small>LOCAL WORKFORCE NETWORK</small></a>
+<nav class="navlinks"><a href="#services">Services</a><a href="#how">How it works</a><a href="#register">Register</a><a href="#login" class="login">Login</a></nav>
+</div></header>
+
+<header class="hero">
+<div class="container hero-grid">
+<div>
+<div class="badge">KARNAL • LOCAL NETWORK</div>
+<h1>Right people.<br><span>Right work.</span><br>Right time.</h1>
+<p>VAA connects customers with local workers and service professionals — and connects businesses with workforce when they need it.</p>
+<div class="badges"><span class="badge">1–20+ workers</span><span class="badge">Flexible rates</span><span class="badge">Skilled & dependable</span></div>
+<a class="btn primary" href="#register">Join VAA</a>
+<a class="btn outline" href="tel:9671163712">Call 9671163712</a>
+<a class="btn outline" href="https://wa.me/919671163712">WhatsApp 9671163712</a>
+<a class="btn outline" href="tel:7015551866">Call 70155 51866</a>
+<a class="btn outline" href="https://wa.me/917015551866">WhatsApp 70155 51866</a>
+</div>
+<img class="heroimg" src="assets/vaa-workforce-banner.png" alt="VAA Workforce services banner">
+</div>
+</header>
+
+<section id="register">
+<div class="container">
+<h2 class="section-title">Choose how you use VAA</h2>
+<p class="section-sub">Three sides of the network. Register once and use the platform for your work or workforce needs.</p>
+<div class="roles">
+<div class="role"><div class="emoji">🏠</div><h3>Customer</h3><p>Need an electrician, plumber, painter, carpenter or labour for a project?</p><button class="btn primary" onclick="openRegister('Customer')">Register as Customer</button></div>
+<div class="role"><div class="emoji">👷</div><h3>Worker / Professional</h3><p>Get your profile into the VAA network and receive suitable work enquiries.</p><button class="btn primary" onclick="openRegister('Worker')">Register as Worker</button></div>
+<div class="role"><div class="emoji">🏪</div><h3>Shop / Business</h3><p>Need workforce or want your shop/business connected with local customers?</p><button class="btn primary" onclick="openRegister('Shop')">Register your Shop</button></div>
+</div>
+</div>
+</section>
+
+<section class="services" id="services">
+<div class="container"><h2 class="section-title">VAA services & supplies</h2>
+<p class="section-sub">From skilled professionals to the materials needed for a project, VAA is building one local network for work and supplies.</p>
+<div class="servicegrid">
+<div class="service"><span>👷</span>General Labour</div><div class="service"><span>🧱</span>Mistri</div><div class="service"><span>⚡</span>Electrician</div><div class="service"><span>🔧</span>Plumber</div>
+<div class="service"><span>🪚</span>Carpenter / Woodwork</div><div class="service"><span>🎨</span>Painter</div><div class="service"><span>📦</span>Loading & Unloading</div><div class="service"><span>🏗️</span>Construction Labour</div>
+<div class="service"><span>🧱</span>Cement & Construction Materials</div><div class="service"><span>🚿</span>Sanitary & Bathroom Supplies</div><div class="service"><span>🪵</span>Wood / Timber & Boards</div><div class="service"><span>🎨</span>Paints & Painting Supplies</div>
+<div class="service"><span>💡</span>Electrical Materials</div><div class="service"><span>🔩</span>Hardware & Fittings</div><div class="service"><span>🔨</span>Tools & Site Supplies</div><div class="service"><span>🏠</span>Other Building Supplies</div>
+</div></div>
+</section>
+
+<section id="how"><div class="container"><h2 class="section-title">How the VAA marketplace works</h2>
+<div class="howgrid">
+<div class="how"><b>01</b><h3>Register</h3><p>Customer, worker or shop creates a profile with basic details.</p></div>
+<div class="how"><b>02</b><h3>Post / Browse</h3><p>Customers post requirements; workers and shops can see relevant opportunities.</p></div>
+<div class="how"><b>03</b><h3>Connect</h3><p>VAA helps the right sides connect. Availability and rates are discussed.</p></div>
+<div class="how"><b>04</b><h3>Complete</h3><p>Work gets started and the customer and professional coordinate the job.</p></div>
+</div></div></section>
+
+<section id="formsection" style="display:none"><div class="container panel">
+<h2 class="section-title" id="formtitle">Register</h2>
+<p class="section-sub">This prototype saves registrations in this browser. A real multi-user version will need a secure online database and login system.</p>
+<form id="regform" onsubmit="registerUser(event)">
+<div class="formgrid">
+<div><label>Full name / Contact person</label><input id="rname" required></div>
+<div><label>Phone number</label><input id="rphone" type="tel" required></div>
+<div><label>City / Area</label><input id="rarea" value="Karnal"></div>
+<div><label>Role</label><select id="rrole"><option>Customer</option><option>Worker</option><option>Shop</option></select></div>
+<div><label>Service / Business category</label><select id="rcat"><option>General Labour</option><option>Mistri</option><option>Electrician</option><option>Plumber</option><option>Carpenter</option><option>Painter</option><option>Loading & Unloading</option><option>Construction Labour</option><option>Cement & Construction Materials</option><option>Sanitary & Bathroom Supplies</option><option>Wood / Timber & Boards</option><option>Paints & Painting Supplies</option><option>Electrical Materials</option><option>Hardware & Fittings</option><option>Tools & Site Supplies</option><option>Other Building Supplies</option><option>Other</option></select></div>
+<div><label>Availability / Requirement</label><input id="ravail" placeholder="e.g. Available daily / Need 5 workers"></div>
+<div class="full"><label>Details</label><textarea id="rdetails" placeholder="Tell VAA anything useful about your work or requirement"></textarea></div>
+</div>
+<div class="form-actions"><button class="btn primary" type="submit">Create VAA profile</button><button class="btn" type="button" onclick="closeRegister()">Cancel</button></div>
+</form>
+</div></section>
+
+<section class="dashboard" id="dashboard"><div class="container dashgrid">
+<aside class="side"><b>VAA DASHBOARD</b><p style="font-size:12px;color:#9da7b2">Prototype</p><button class="active">Overview</button><button>My Profile</button><button>My Requests</button><button>Matches</button></aside>
+<main class="dashmain"><h2 id="dashhello">Welcome to VAA</h2><p class="section-sub" id="dashrole"></p>
+<div class="stats"><div class="stat"><b id="stat1">0</b><span>Profile / Requests</span></div><div class="stat"><b>3</b><span>Network roles</span></div><div class="stat"><b>8</b><span>Service categories</span></div></div>
+<div class="listing"><h3>Quick actions</h3><div class="job"><div><b>Need workers?</b><br><small>Post a workforce requirement from your customer/shop account.</small></div><button class="btn primary" onclick="showToast('Work-posting module is the next step.')">Post requirement</button></div>
+<div class="job"><div><b>Looking for work?</b><br><small>Keep your category and availability updated.</small></div><button class="btn" onclick="showToast('Profile editing module is the next step.')">Update profile</button></div></div>
+</main>
+</div></section>
+
+<footer><div class="container foot"><div><b class="yellow">VAA</b> — Skilled Hands | Stronger Tomorrow</div><div>
+Call: <a href="tel:9671163712">9671163712</a> ·
+<a href="tel:7015551866">70155 51866</a>
+&nbsp; | &nbsp;
+WhatsApp: <a href="https://wa.me/919671163712">9671163712</a> ·
+<a href="https://wa.me/917015551866">70155 51866</a>
+</div></div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+let currentRole='Customer';
+function openRegister(role){
+ currentRole=role;
+ document.getElementById('formsection').style.display='block';
+ document.getElementById('rrole').value=role;
+ document.getElementById('formtitle').textContent='Register as '+role;
+ document.getElementById('formsection').scrollIntoView({behavior:'smooth'});
+}
+function closeRegister(){document.getElementById('formsection').style.display='none'}
+function registerUser(e){
+ e.preventDefault();
+ const user={
+  name:document.getElementById('rname').value,
+  phone:document.getElementById('rphone').value,
+  area:document.getElementById('rarea').value,
+  role:document.getElementById('rrole').value,
+  category:document.getElementById('rcat').value,
+  availability:document.getElementById('ravail').value,
+  details:document.getElementById('rdetails').value,
+  created:new Date().toISOString()
+ };
+ const all=JSON.parse(localStorage.getItem('vaa_users')||'[]'); all.push(user); localStorage.setItem('vaa_users',JSON.stringify(all));
+ document.getElementById('formsection').style.display='none';
+ document.getElementById('dashboard').style.display='block';
+ document.getElementById('dashhello').textContent='Welcome, '+user.name;
+ document.getElementById('dashrole').textContent='Registered as '+user.role+' • '+user.category+' • '+user.area;
+ document.getElementById('stat1').textContent='1';
+ document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
+ showToast('VAA profile created on this device.');
+}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2600)}
+</script>
+</body>
+</html>

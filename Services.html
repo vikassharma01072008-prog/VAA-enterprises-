@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Services — VAA Workforce & Marketplace</title>
+<meta name="description" content="VAA services — labour, mistri, electrician, plumber, carpenter, painter and construction material supply delivered to your doorstep in Karnal.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0b1117">
+<link rel="canonical" href="https://vikassharma01072008-prog.github.io/VAA-enterprises-/services.html">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f5f6f8;color:#111820;overflow-x:hidden;opacity:1;transition:opacity .45s ease}
+body.page-out{opacity:0}
+body.page-in{opacity:0;animation:pageIn .5s ease forwards}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+a{text-decoration:none;color:inherit}
+:root{--yellow:#ffd400;--dark:#0b1117;--dark2:#141c25;--muted:#687382;--line:#e2e6eb;--white:#fff;--green:#18a66a}
+.container{width:min(1180px,92%);margin:auto;position:relative;z-index:2}
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,17,23,.97);color:white;border-bottom:1px solid #252d36}
+.navin{height:70px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:29px;font-weight:950;letter-spacing:-2px}.brand i{color:var(--yellow);font-style:normal}.brand small{display:block;font-size:8px;letter-spacing:2px;color:#9da7b2;margin-top:-4px}
+.navlinks{display:flex;align-items:center;gap:20px;font-size:13px;font-weight:800}
+.navlinks a:hover{color:var(--yellow)}.navlinks a.active{color:var(--yellow)}
+.login{border:1px solid #56606c;padding:10px 14px;border-radius:10px;transition:.25s}
+.login:hover{background:var(--yellow);color:#111;border-color:var(--yellow)}
+.btn{border:0;border-radius:11px;padding:13px 18px;font-weight:900;cursor:pointer;display:inline-block;transition:transform .18s ease,box-shadow .25s ease,background .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.18)}
+.btn:active{transform:translateY(0) scale(.98)}
+.primary{background:var(--yellow);color:#101010}.darkbtn{background:#17202a;color:white;border:1px solid #3b4652}
+.btn-sm{padding:9px 13px;font-size:12px;border-radius:9px}
+.page-hero{background:var(--dark);color:white;padding:60px 0 70px;position:relative;overflow:hidden}
+.page-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 50%,rgba(255,212,0,.15),transparent 60%);pointer-events:none}
+.eyebrow{display:inline-block;border:1px solid #303944;background:#171f28;border-radius:99px;padding:8px 12px;font-size:11px;font-weight:800;letter-spacing:.6px}
+.page-hero h1{font-size:clamp(40px,5.5vw,64px);line-height:1;letter-spacing:-3px;margin:18px 0 14px}
+.page-hero h1 span{color:var(--yellow)}
+.page-hero p{font-size:17px;line-height:1.55;color:#c7ced6;max-width:640px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:30px auto 10px}
+.filter-btn{border:1px solid var(--line);background:white;padding:11px 16px;border-radius:99px;font-weight:850;cursor:pointer;font-size:13px;transition:.2s}
+.filter-btn:hover{border-color:var(--yellow)}
+.filter-btn.active{background:var(--dark);color:var(--yellow);border-color:var(--dark)}
+section.block{padding:60px 0}
+.section-title{font-size:34px;letter-spacing:-1.5px;margin:0 0 9px}
+.section-sub{color:var(--muted);max-width:760px;line-height:1.55;margin:0 0 8px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.svc-card{background:white;border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease,border-color .3s}
+.svc-card:hover{transform:translateY(-5px);box-shadow:0 20px 45px rgba(0,0,0,.09);border-color:var(--yellow)}
+.svc-icon{font-size:34px;margin-bottom:12px}
+.svc-card h3{margin:0 0 8px;font-size:19px;letter-spacing:-.5px}
+.svc-card p{color:var(--muted);font-size:14px;line-height:1.55;margin:0 0 16px;flex:1}
+.svc-price{background:#f7f8fa;border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px;font-size:13px;line-height:1.6}
+.svc-price b{color:#111820}
+.svc-price .total{color:#0a7a4f;font-weight:950;font-size:15px}
+.svc-price .enq{color:var(--muted);font-style:italic}
+.delivery{background:var(--dark);color:white;position:relative;overflow:hidden}
+.delivery::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,212,0,.1),transparent 55%);pointer-events:none}
+.delivery .section-title{color:white}
+.delivery .section-sub{color:#aeb8c2}
+.delivery-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;margin-top:30px;align-items:start}
+.del-features{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.del-features li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5;color:#d1d8df}
+.del-features .check{color:var(--yellow);font-size:19px;flex-shrink:0;margin-top:1px}
+.material-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.mat-card{background:#17212b;border:1px solid #2a3540;border-radius:14px;padding:16px;transition:.25s}
+.mat-card:hover{transform:translateY(-3px);border-color:var(--yellow);box-shadow:0 12px 30px rgba(255,212,0,.1)}
+.mat-card span{display:block;font-size:24px;margin-bottom:6px}
+.mat-card b{font-size:14px;display:block;margin-bottom:4px}
+.mat-card small{font-size:11px;color:#9da7b2}
+.order-bar{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;background:#17212b;border:1px solid #2a3540;padding:22px;border-radius:16px}
+.order-bar .txt{flex:1;min-width:220px}
+.order-bar b{display:block;font-size:16px;margin-bottom:4px}
+.order-bar small{color:#9da7b2;font-size:12px}
+footer{background:#0b1117;color:#b8c1ca;padding:35px 0}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.yellow{color:var(--yellow)}
+@media(max-width:950px){.svc-grid{grid-template-columns:repeat(2,1fr)}.delivery-grid{grid-template-columns:1fr}}
+@media(max-width:850px){.navlinks a:not(.login){display:none}}
+@media(max-width:600px){.svc-grid,.material-grid{grid-template-columns:1fr}.foot{display:block}.foot>div+div{margin-top:12px}.page-hero h1{letter-spacing:-2px}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.9,.3,1.1)}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body class="page-in">
+
+<header class="nav"><div class="container navin">
+<a class="brand" href="VAA_index-1.html"><i>V</i>AA<small>WORKFORCE • MARKETPLACE</small></a>
+<nav class="navlinks">
+<a href="VAA_index-1.html">Home</a>
+<a href="services.html" class="active">Services</a>
+<a href="marketplace.html">Marketplace</a>
+<a href="about.html">About</a>
+<a href="vaa-commission.html">Commission</a>
+<a class="login" href="#" onclick="openLogin();return false">Login</a>
+</nav>
+</div></header>
+
+<header class="page-hero"><div class="container">
+<span class="eyebrow">EVERYTHING VAA PROVIDES</span>
+<h1>Our <span>Services</span></h1>
+<p>Workers, skilled professionals and construction materials — all in one place. Book labour, hire specialists, or get materials delivered to your doorstep in Karnal and nearby areas.</p>
+</div></header>
+
+<section class="block" id="workers"><div class="container reveal">
+<h2 class="section-title">Workforce & professional services</h2>
+<p class="section-sub">Trained workers and skilled professionals for every job — from daily labour to specialist trades.</p>
+
+<div class="filters">
+<button class="filter-btn active" data-filter="all">All</button>
+<button class="filter-btn" data-filter="labour">Labour & Site</button>
+<button class="filter-btn" data-filter="skilled">Skilled Trades</button>
+</div>
+
+<div class="svc-grid" id="svcGrid">
+
+<div class="svc-card" data-cat="labour">
+<div class="svc-icon">👷</div>
+<h3>General Labour</h3>
+<p>Daily wage labour for construction, loading, unloading, site cleaning and general work.</p>
+<div class="svc-price">
+Worker rate: <b>₹800/head</b><br>
+VAA service: <b>₹25/head</b><br>
+<span class="total">Total: ₹825/head</span>
+</div>
+<a class="btn primary btn-sm" href="tel:9671163712">Book Now</a>
+</div>
+
+<div class="svc-card" data-cat="skilled">
+<div class="svc-icon">🧱</div>
+<h3>Mistri (Mason)</h3>
+<p>Brickwork, plastering, tiling, and all masonry work by experienced masons.</p>
+<div class="svc-price">
+Worker rate: <b>₹1,200/head</b><br>
+VAA service: <b>₹30/head</b><br>
+<span class="total">Total: ₹1,230/head</span>
+</div>
+<a class="btn primary btn-sm" href="tel:9671163712">Book Now</a>
+</div>
+
+<div class="svc-card" data-cat="skilled">
+<div class="svc-icon">⚡</div>
+<h3>Electrician</h3>
+<p>Wiring, fittings, repairs, panel work and all electrical jobs for homes and sites.</p>
+<div class="svc-price"><span class="enq">Rate on enquiry</span></div>
+<a class="btn primary btn-sm" href="tel:9671163712">Book Now</a>
+</div>
+
+<div class="svc-card" data-cat="skilled">
+<div class="svc-icon">🔧</div>
+<h3>Plumber</h3>
+<p>Pipeline fitting, tap repair, bathroom fittings, drainage and water supply work.</p>
+<div class="svc-price"><span class="enq">Rate on enquiry</span></div>
+<a class="btn primary btn-sm" href="tel:9671163712">Book Now</a>
+</div>
+
+<div class="svc-card" data-cat="skilled">
+<div class="svc-icon">🪚</div>
+<h3>Carpenter / Woodwork</h3>
+<p>Furniture, doors, windows, modular work, wood repair and custom woodwork.</p>
+<div class="svc-price"><span class="enq">Rate on enquiry</span></div>
+<a class="btn primary btn-sm" href="tel:9671163712">Book Now</a>
+</div>
+
+<div class="svc-card" data-cat="skilled">
+<div class="svc-icon">🎨</div>
+<h3>Painter</h3>
+<p>Interior and exterior painting, putty, texture work and wall finishing.</p>
+<div class="svc-price"><span class="enq">Rate on enquiry</span></div>
+<a class="btn primary btn-sm" href="tel:9671163712">Book Now</a>
+</div>
+
+<div class="svc-card" data-cat="labour">
+<div class="svc-icon">📦</div>
+<h3>Loading & Unloading</h3>
+<p>Shifting, loading, unloading, warehouse work and heavy lifting with manpower.</p>
+<div class="svc-price"><span class="enq">Rate on enquiry</span></div>
+<a class="btn primary btn-sm" href="tel:9671163712">Book Now</a>
+</div>
+
+<div class="svc-card" data-cat="labour">
+<div class="svc-icon">🏗️</div>
+<h3>Construction Labour</h3>
+<p>Skilled site helpers for ongoing construction projects and building work.</p>
+<div class="svc-price"><span class="enq">Rate on enquiry</span></div>
+<a class="btn primary btn-sm" href="tel:9671163712">Book Now</a>
+</div>
+
+</div>
+</div></section>
+<section class="block delivery" id="delivery"><div class="container reveal">
+<h2 class="section-title">🚚 Materials at Your Doorstep</h2>
+<p class="section-sub">From cement and sanitary ware to wood, paints, hardware and tools — order any construction material and we deliver straight to your site in Karnal and nearby areas.</p>
+
+<div class="delivery-grid">
+<div>
+<ul class="del-features">
+<li><span class="check">✓</span> Same-day delivery in Karnal</li>
+<li><span class="check">✓</span> Bulk orders welcome</li>
+<li><span class="check">✓</span> Trusted brands only</li>
+<li><span class="check">✓</span> Pay on delivery — Cash / UPI</li>
+<li><span class="check">✓</span> Delivery charges vary by order — confirmed on call before dispatch</li>
+</ul>
+</div>
+<div class="material-grid">
+<div class="mat-card"><span>🧱</span><b>Cement & Construction</b><small>All grades & brands</small></div>
+<div class="mat-card"><span>🚿</span><b>Sanitary & Bathroom</b><small>Fittings, taps, pipes</small></div>
+<div class="mat-card"><span>🪵</span><b>Wood & Timber</b><small>Plywood, boards, planks</small></div>
+<div class="mat-card"><span>🎨</span><b>Paints & Finishes</b><small>Interior & exterior</small></div>
+<div class="mat-card"><span>💡</span><b>Electrical Materials</b><small>Wires, switches, fittings</small></div>
+<div class="mat-card"><span>🔩</span><b>Hardware & Fittings</b><small>Nuts, bolts, hinges</small></div>
+<div class="mat-card"><span>🔨</span><b>Tools & Site Supplies</b><small>Hand tools, safety gear</small></div>
+<div class="mat-card"><span>🏠</span><b>Other Building Supplies</b><small>Custom requirements</small></div>
+</div>
+</div>
+
+<div class="order-bar">
+<div class="txt">
+<b>📞 Order now — we'll confirm price and delivery on call</b>
+<small>Call or WhatsApp with your list. We'll quote, confirm, and dispatch.</small>
+</div>
+<a class="btn primary" href="tel:9671163712">Call 9671163712</a>
+<a class="btn darkbtn" href="https://wa.me/919671163712" target="_blank">WhatsApp Order</a>
+<a class="btn darkbtn" href="tel:7015551866">70155 51866</a>
+</div>
+</div></section>
+
+<footer><div class="container foot">
+<div><b class="yellow">VAA</b> — Skilled Hands | Stronger Tomorrow</div>
+<div>Call <a href="tel:9671163712">9671163712</a> · <a href="tel:7015551866">70155 51866</a> &nbsp;|&nbsp; <a href="https://wa.me/919671163712">WhatsApp</a> · <a href="https://wa.me/917015551866">WhatsApp 2</a></div>
+</div></footer>
+
+<script>
+/* ===== PAGE TRANSITION ===== */
+document.addEventListener("click", (e) => {
+  const link = e.target.closest("a");
+  if (!link) return;
+  const href = link.getAttribute("href");
+  if (!href || href.startsWith("#") || href.startsWith("tel:") || href.startsWith("http") || href.startsWith("mailto")) return;
+  e.preventDefault();
+  document.body.classList.add("page-out");
+  setTimeout(() => { window.location.href = href; }, 380);
+});
+
+/* ===== SERVICE FILTER ===== */
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const f = btn.dataset.filter;
+    document.querySelectorAll(".svc-card").forEach(card => {
+      const cat = card.dataset.cat;
+      card.style.display = (f === "all" || cat === f) ? "" : "none";
+    });
+  });
+});
+
+/* ===== SCROLL REVEAL ===== */
+(function(){
+  const targets = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    targets.forEach(t => t.classList.add("in"));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  targets.forEach(t => io.observe(t));
+})();
+
+/* ===== LOGIN (links back to home page) ===== */
+function openLogin(){
+  window.location.href = "VAA_index-1.html";
+}
+</script>
+</body>
+  </html>

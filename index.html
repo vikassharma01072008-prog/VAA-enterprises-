@@ -208,4 +208,113 @@ function openShopListing(){
  <div><label>Phone</label><input id="lp" value="${esc(currentUser?.phone||"")}" required></div>
  <div><label>Material category</label><select id="lc">${categoryOptions("Cement & Construction Materials")}</select></div>
  <div><label>Product / Material</label><input id="lproduct" placeholder="e.g. Cement, wire, plywood" required></div>
- <div><label>Price / Unit</label><inp
+ <div><label>Price / Unit</label><input id="lprice" placeholder="e.g. ₹420 / bag"></div>
+ <div><label>Area</label><input id="larea" value="Karnal"></div>
+ <div class="full"><label>Details</label><textarea id="ldetails" placeholder="Brand, stock, delivery, minimum order, etc."></textarea></div>
+ </div><div class="form-actions"><button class="btn primary">Publish Listing</button></div></form>`);
+}
+async function saveListing(e){
+ e.preventDefault();
+ const l={
+   name:document.getElementById("ln").value.trim(),
+   phone:document.getElementById("lp").value.trim(),
+   category:document.getElementById("lc").value,
+   product:document.getElementById("lproduct").value.trim(),
+   price:document.getElementById("lprice").value.trim(),
+   area:document.getElementById("larea").value.trim(),
+   details:document.getElementById("ldetails").value.trim()
+ };
+ const saved = await save("vaa_listings", l);
+ if(!saved) return;
+ closeModal();
+ toast("Material listing published.");
+ if(currentUser) openDashboard("listings");
+}
+
+function openLogin(){
+ showModal("VAA Login",`<p class="section-sub">Enter the phone number you registered with.</p><form onsubmit="loginUser(event)"><label>Phone number</label><input id="loginphone" type="tel" required><div class="form-actions"><button class="btn primary">Login</button><button type="button" class="btn" onclick="closeModal()">Cancel</button></div></form>`);
+}
+async function loginUser(e){
+ e.preventDefault();
+ const p=document.getElementById("loginphone").value.trim();
+ if(!window.sb){ toast("Backend not ready, try again."); return; }
+ const { data: users, error } = await window.sb.from("vaa_users").select('*').eq('phone', p);
+ if(error){ toast("Error: "+error.message); return; }
+ if(!users || users.length === 0){ toast("No profile found with that phone."); return; }
+ currentUser = users[0];
+ closeModal();
+ openDashboard();
+ toast("Welcome back, "+currentUser.name+"!");
+}
+
+function openDashboard(section="overview"){
+ document.getElementById("dashboard").style.display="block";document.getElementById("dashboard").scrollIntoView({behavior:"smooth"});
+ document.getElementById("dashhello").textContent=currentUser?"Welcome, "+currentUser.name:"VAA Dashboard";
+ document.getElementById("dashrole").textContent=currentUser?currentUser.role+" • "+currentUser.category+" • "+currentUser.area:"Marketplace dashboard";
+ renderDashboard();showDash(section);
+}
+async function renderDashboard(){
+ const users = await data("vaa_users");
+ const jobs = await data("vaa_jobs");
+ const ls = await data("vaa_listings");
+
+ document.getElementById("sUsers").textContent = users.length;
+ document.getElementById("sJobs").textContent = jobs.length;
+ document.getElementById("sListings").textContent = ls.length;
+ document.getElementById("sMatches").textContent =
+   currentUser && currentUser.role === "Worker"
+     ? jobs.filter(j => j.category === currentUser.category).length
+     : users.filter(u => u.role === "Worker").length;
+
+ document.getElementById("profileBox").innerHTML = currentUser
+   ? `<div class="item"><div><b>${esc(currentUser.name)}</b><br><small>${esc(currentUser.phone)} • ${esc(currentUser.area)}</small><br><span class="tag">${esc(currentUser.role)}</span><span class="tag">${esc(currentUser.category)}</span></div><button class="btn darkbtn" onclick="openRegister('${esc(currentUser.role)}')">Edit / New Profile</button></div>`
+   : `<div class="empty">Create or log into a profile first.</div>`;
+
+ document.getElementById("jobsBox").innerHTML = jobs.length
+   ? jobs.slice().reverse().map(j => `<div class="item"><div><b>${esc(j.category)}</b> — ${esc(j.count)} worker(s)<br><small>${esc(j.location)} • ${esc(j.duration||"Duration not set")} • ${esc(j.budget||"Rate negotiable")}</small><br><span class="tag">${esc(j.status)}</span></div><a class="btn primary" href="tel:${esc(j.phone)}">Contact</a></div>`).join("")
+   : `<div class="empty">No requirements yet.</div>`;
+
+ document.getElementById("listingsBox").innerHTML = ls.length
+   ? ls.slice().reverse().map(l => `<div class="item"><div><b>${esc(l.product)}</b><br><small>${esc(l.category)} • ${esc(l.area)} • ${esc(l.price||"Price on enquiry")}</small></div><a class="btn primary" href="tel:${esc(l.phone)}">Contact</a></div>`).join("")
+   : `<div class="empty">No material listings yet.</div>`;
+
+ const workers = users.filter(u => u.role === "Worker");
+ document.getElementById("matchesBox").innerHTML = workers.length
+   ? workers.map(w => `<div class="item"><div><b>${esc(w.name)}</b><br><small>${esc(w.category)} • ${esc(w.area)} • ${esc(w.availability||"Availability not set")}</small><br><span class="tag">${esc(w.details||"Professional")}</span></div><a class="btn primary" href="tel:${esc(w.phone)}">Contact</a></div>`).join("")
+   : `<div class="empty">No worker profiles yet.</div>`;
+}
+function showDash(id){
+ document.querySelectorAll(".dashsection").forEach(x=>x.classList.remove("show"));document.getElementById("d-"+id).classList.add("show");
+ document.querySelectorAll(".side button").forEach(x=>x.classList.remove("active"));const b=document.querySelector('.side button[data-section="'+id+'"]');if(b)b.classList.add("active");
+}
+async function renderPublicJobs(){
+ const jobs = await data("vaa_jobs");
+ const el = document.getElementById("publicJobs");
+ if(!el) return;
+ el.innerHTML = jobs.length
+   ? jobs.slice().reverse().slice(0,8).map(j => `<div class="item"><div><b>${esc(j.category)}</b> — ${esc(j.count)} worker(s)<br><small>${esc(j.location)} • ${esc(j.duration||"Flexible")} • ${esc(j.budget||"Negotiable")}</small></div><a class="btn primary" href="tel:${esc(j.phone)}">Contact</a></div>`).join("")
+   : `<div class="empty">No public requirements yet. Be the first to post one.</div>`;
+}
+
+window.addEventListener("load",()=>{
+ renderPublicJobs();
+ document.querySelectorAll(".side button").forEach(b=>b.onclick=()=>showDash(b.dataset.section));
+});
+</script>
+
+<section class="dashboard" id="dashboard"><div class="container dashgrid">
+<aside class="side"><b>VAA DASHBOARD</b><p style="font-size:11px;color:#9da7b2">Marketplace control centre</p>
+<button data-section="overview" class="active">Overview</button><button data-section="profile">My Profile</button><button data-section="requests">Requirements</button><button data-section="matches">Matches / Workers</button><button data-section="listings">Material Listings</button><button onclick="openRequirement()">+ Post Requirement</button><button onclick="openShopListing()">+ Add Material</button>
+</aside>
+<main class="dashmain"><h2 id="dashhello" style="margin:0 0 5px">VAA Dashboard</h2><p id="dashrole" class="section-sub"></p>
+<div class="stats"><div class="stat"><b id="sUsers">0</b><span>Profiles</span></div><div class="stat"><b id="sJobs">0</b><span>Requirements</span></div><div class="stat"><b id="sListings">0</b><span>Listings</span></div><div class="stat"><b id="sMatches">0</b><span>Matches</span></div></div>
+<div class="dashsection show" id="d-overview"><div class="card" style="margin-top:20px"><h3>Quick actions</h3><div class="form-actions"><button class="btn primary" onclick="openRequirement()">Post Requirement</button><button class="btn darkbtn" onclick="openShopListing()">Add Material Listing</button><button class="btn" onclick="openRegister(currentUser?.role||'Worker')">Create / Edit Profile</button></div></div></div>
+<div class="dashsection" id="d-profile"><h3>My Profile</h3><div id="profileBox"></div></div>
+<div class="dashsection" id="d-requests"><h3>Work Requirements</h3><div id="jobsBox" class="list"></div></div>
+<div class="dashsection" id="d-matches"><h3>Worker Matching</h3><p class="section-sub">Workers are surfaced by category and area from profiles stored in the VAA database.</p><div id="matchesBox" class="list"></div></div>
+<div class="dashsection" id="d-listings"><h3>Material Listings</h3><div id="listingsBox" class="list"></div></div>
+</main></div></section>
+
+<script>renderDashboard();</script>
+</body>
+</html>

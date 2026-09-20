@@ -94,9 +94,29 @@ footer{background:var(--dark);color:#b8c1ca;padding:35px 0}.foot{display:flex;ju
 <script>
 const CATEGORIES=["General Labour","Mistri","Electrician","Plumber","Carpenter","Painter","Loading & Unloading","Construction Labour","Cement & Construction Materials","Sanitary & Bathroom Supplies","Wood / Timber & Boards","Paints & Painting Supplies","Electrical Materials","Hardware & Fittings","Tools & Site Supplies","Other Building Supplies"];
 let currentRole="Customer", currentUser=null;
+// ==== SUPABASE BACKEND ====
+const SUPABASE_URL = "https://gynphsibkcrivosuamxp.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5bnBoc2lia2NyaXZvc3VhbXhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4OTA0NzQsImV4cCI6MjEwNTQ2NjQ3NH0.GNKrZgJFj4496-kPzfdc2Fzv3bS8YO6CLrWPV4PyucM";
 
-function data(key){try{return JSON.parse(localStorage.getItem(key)||"[]")}catch(e){return[]}}
-function save(key,val){localStorage.setItem(key,JSON.stringify(val))}
+const _sbScript = document.createElement('script');
+_sbScript.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+_sbScript.onload = () => {
+  window.sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  console.log("Supabase connected");
+};
+document.head.appendChild(_sbScript);
+
+async function data(table){
+  const { data, error } = await window.sb.from(table).select('*').order('created', { ascending: true });
+  if (error) { console.error(error); return []; }
+  return data || [];
+}
+async function save(table, item){
+  const { data, error } = await window.sb.from(table).insert(item).select();
+  if (error) { console.error(error); toast("Error: " + error.message); return null; }
+  return data[0];
+ }
+
 function esc(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";setTimeout(()=>t.style.display="none",2600)}
 function showModal(title,body){document.getElementById("modalTitle").textContent=title;document.getElementById("modalBody").innerHTML=body;document.getElementById("modal").style.display="flex"}

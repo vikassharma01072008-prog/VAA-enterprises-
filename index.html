@@ -440,4 +440,93 @@ window.addEventListener("load",()=>{
     ctx.restore();
   }
 
-  fun
+function tick(){
+    ctx.clearRect(0,0,W,H);
+    const cx = W/2, cy = H/2;
+
+    for (let i=0;i<shapes.length;i++){
+      const s = shapes[i];
+      const dx = cx - s.x, dy = cy - s.y;
+      const d = Math.hypot(dx,dy);
+      if (d < 15){
+        const angle = Math.random()*Math.PI*2;
+        const dist = Math.max(W,H) * 0.8;
+        s.x = cx + Math.cos(angle)*dist;
+        s.y = cy + Math.sin(angle)*dist;
+        s.emoji = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+        s.speed = 0.25 + Math.random()*0.45;
+        s.size = 14 + Math.random()*20;
+      } else {
+        s.x += (dx/d)*s.speed;
+        s.y += (dy/d)*s.speed;
+      }
+      s.rotation += s.rotSpeed;
+
+      const t = Math.min(1, (1 - d/Math.max(W,H)));
+      const alpha = s.alpha * (0.4 + t*0.6);
+
+      ctx.save();
+      ctx.translate(s.x, s.y);
+      ctx.rotate(s.rotation);
+      ctx.globalAlpha = alpha;
+      ctx.font = s.size + "px Arial";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(s.emoji, 0, 0);
+      ctx.restore();
+
+      ctx.save();
+      ctx.globalAlpha = alpha*0.25;
+      ctx.strokeStyle = s.color + "0.6)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(cx, cy);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    drawGlow();
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener("resize", () => { resize(); init(); });
+  init();
+  tick();
+})();
+
+/* ===== SCROLL REVEAL ANIMATIONS ===== */
+(function(){
+  const targets = document.querySelectorAll(".reveal, .reveal-stagger");
+  if (!("IntersectionObserver" in window)){
+    targets.forEach(t => t.classList.add("in"));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  targets.forEach(t => io.observe(t));
+})();
+</script>
+
+<section class="dashboard" id="dashboard"><div class="container dashgrid">
+<aside class="side"><b>VAA DASHBOARD</b><p style="font-size:11px;color:#9da7b2">Marketplace control centre</p>
+<button data-section="overview" class="active">Overview</button><button data-section="profile">My Profile</button><button data-section="requests">Requirements</button><button data-section="matches">Matches / Workers</button><button data-section="listings">Material Listings</button><button onclick="openRequirement()">+ Post Requirement</button><button onclick="openShopListing()">+ Add Material</button>
+</aside>
+<main class="dashmain"><h2 id="dashhello" style="margin:0 0 5px">VAA Dashboard</h2><p id="dashrole" class="section-sub"></p>
+<div class="stats"><div class="stat"><b id="sUsers">0</b><span>Profiles</span></div><div class="stat"><b id="sJobs">0</b><span>Requirements</span></div><div class="stat"><b id="sListings">0</b><span>Listings</span></div><div class="stat"><b id="sMatches">0</b><span>Matches</span></div></div>
+<div class="dashsection show" id="d-overview"><div class="card" style="margin-top:20px"><h3>Quick actions</h3><div class="form-actions"><button class="btn primary" onclick="openRequirement()">Post Requirement</button><button class="btn darkbtn" onclick="openShopListing()">Add Material Listing</button><button class="btn" onclick="openRegister(currentUser?.role||'Worker')">Create / Edit Profile</button></div></div></div>
+<div class="dashsection" id="d-profile"><h3>My Profile</h3><div id="profileBox"></div></div>
+<div class="dashsection" id="d-requests"><h3>Work Requirements</h3><div id="jobsBox" class="list"></div></div>
+<div class="dashsection" id="d-matches"><h3>Worker Matching</h3><p class="section-sub">Workers are surfaced by category and area from profiles stored in the VAA database.</p><div id="matchesBox" class="list"></div></div>
+<div class="dashsection" id="d-listings"><h3>Material Listings</h3><div id="listingsBox" class="list"></div></div>
+</main></div></section>
+
+<script>renderDashboard();</script>
+</body>
+</html>

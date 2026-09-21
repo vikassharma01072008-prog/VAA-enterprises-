@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marketplace — VAA Workforce & Materials</title>
+<meta name="description" content="Browse live jobs, worker requirements and material listings from the VAA marketplace. Filter by category, area, and search.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0b1117">
+<link rel="canonical" href="https://vikassharma01072008-prog.github.io/VAA-enterprises-/marketplace.html">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:#f5f6f8;color:#111820;overflow-x:hidden;opacity:1;transition:opacity .45s ease}
+body.page-out{opacity:0}
+body.page-in{opacity:0;animation:pageIn .5s ease forwards}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+a{text-decoration:none;color:inherit}
+:root{--yellow:#ffd400;--dark:#0b1117;--dark2:#141c25;--muted:#687382;--line:#e2e6eb;--white:#fff;--green:#18a66a}
+.container{width:min(1180px,92%);margin:auto;position:relative;z-index:2}
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,17,23,.97);color:white;border-bottom:1px solid #252d36}
+.navin{height:70px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:29px;font-weight:950;letter-spacing:-2px}.brand i{color:var(--yellow);font-style:normal}.brand small{display:block;font-size:8px;letter-spacing:2px;color:#9da7b2;margin-top:-4px}
+.navlinks{display:flex;align-items:center;gap:20px;font-size:13px;font-weight:800}
+.navlinks a:hover{color:var(--yellow)}.navlinks a.active{color:var(--yellow)}
+.login{border:1px solid #56606c;padding:10px 14px;border-radius:10px;transition:.25s}
+.login:hover{background:var(--yellow);color:#111;border-color:var(--yellow)}
+.btn{border:0;border-radius:11px;padding:13px 18px;font-weight:900;cursor:pointer;display:inline-block;transition:transform .18s ease,box-shadow .25s ease,background .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.18)}
+.btn:active{transform:translateY(0) scale(.98)}
+.primary{background:var(--yellow);color:#101010}.darkbtn{background:#17202a;color:white;border:1px solid #3b4652}
+.btn-sm{padding:9px 14px;font-size:12px;border-radius:9px}
+.page-hero{background:var(--dark);color:white;padding:60px 0 70px;position:relative;overflow:hidden}
+.page-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 50%,rgba(255,212,0,.15),transparent 60%);pointer-events:none}
+.eyebrow{display:inline-block;border:1px solid #303944;background:#171f28;border-radius:99px;padding:8px 12px;font-size:11px;font-weight:800;letter-spacing:.6px}
+.page-hero h1{font-size:clamp(38px,5.5vw,60px);line-height:1;letter-spacing:-3px;margin:18px 0 14px}
+.page-hero h1 span{color:var(--yellow)}
+.page-hero p{font-size:16px;line-height:1.55;color:#c7ced6;max-width:640px}
+section.block{padding:55px 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tab{border:1px solid var(--line);background:white;padding:11px 18px;border-radius:99px;font-weight:850;cursor:pointer;font-size:13px;font-family:inherit;color:#111820;transition:.2s}
+.tab:hover{border-color:var(--yellow)}
+.tab.active{background:var(--dark);color:var(--yellow);border-color:var(--dark)}
+.filterbar{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px;background:white;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:22px}
+.filterbar input,.filterbar select{width:100%;padding:11px 13px;border:1px solid #d7dce2;border-radius:10px;font:inherit;font-size:14px;background:white;transition:.2s}
+.filterbar input:focus,.filterbar select:focus{outline:none;border-color:var(--yellow);box-shadow:0 0 0 3px rgba(255,212,0,.25)}
+.results-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.results-head h2{margin:0;font-size:22px;letter-spacing:-.5px}
+.results-head small{color:var(--muted);font-weight:700}
+.list{display:grid;gap:12px}
+.job-card{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;transition:transform .25s ease,box-shadow .25s ease,border-color .3s;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.job-card:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(0,0,0,.07);border-color:var(--yellow)}
+.job-card h3{margin:0 0 8px;font-size:17px;letter-spacing:-.3px;display:flex;align-items:center;gap:8px}
+.job-meta{color:var(--muted);font-size:13px;line-height:1.7}
+.job-meta b{color:#111820}
+.tag{display:inline-block;background:#eef1f4;padding:4px 9px;border-radius:99px;font-size:10px;font-weight:850;margin-right:5px;letter-spacing:.3px}
+.tag.open{background:#d8f5e4;color:#0a7a4f}
+.tag.list{background:#fff3cc;color:#8a6400}
+.job-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.job-actions a{white-space:nowrap}
+.empty{padding:60px 20px;text-align:center;background:white;border:1px dashed #cfd5dc;border-radius:16px;color:var(--muted)}
+.empty .big{font-size:44px;display:block;margin-bottom:14px}
+.empty b{display:block;color:#111820;font-size:17px;margin-bottom:6px}
+.loading{padding:60px 20px;text-align:center;color:var(--muted);background:white;border-radius:16px;border:1px dashed #cfd5dc}
+.spinner{width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--yellow);border-radius:50%;margin:0 auto 14px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+footer{background:#0b1117;color:#b8c1ca;padding:35px 0}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.yellow{color:var(--yellow)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.9,.3,1.1)}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:900px){.filterbar{grid-template-columns:1fr 1fr}.job-card{grid-template-columns:1fr}.job-actions{justify-content:flex-start}}
+@media(max-width:850px){.navlinks{gap:12px;font-size:12px}}
+@media(max-width:600px){.filterbar{grid-template-columns:1fr}.foot{display:block}.foot>div+div{margin-top:12px}.page-hero h1{letter-spacing:-2px}}
+</style>
+</head>
+<body class="page-in">
+
+<header class="nav"><div class="container navin">
+<a class="brand" href="index.html"><i>V</i>AA<small>WORKFORCE • MARKETPLACE</small></a>
+<nav class="navlinks">
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="marketplace.html" class="active">Marketplace</a>
+<a href="about.html">About</a>
+<a href="vaa-commission.html">Commission</a>
+<a class="login" href="index.html">Login</a>
+</nav>
+</div></header>
+
+<header class="page-hero"><div class="container">
+<span class="eyebrow">LIVE FROM THE VAA NETWORK</span>
+<h1>Live <span>Marketplace</span></h1>
+<p>Every job posted and every material listed on VAA — updated live from our database. Browse, filter, and contact directly.</p>
+</div></header>
+
+<section class="block"><div class="container">
+<div class="tabs">
+<button class="tab active" data-tab="jobs">📋 Jobs & Requirements</button>
+<button class="tab" data-tab="listings">🧱 Material Listings</button>
+</div>
+
+<div class="filterbar">
+<input id="searchInput" type="text" placeholder="Search by name, location, or keyword...">
+<select id="catFilter">
+<option value="">All Categories</option>
+<option>General Labour</option>
+<option>Mistri</option>
+<option>Electrician</option>
+<option>Plumber</option>
+<option>Carpenter</option>
+<option>Painter</option>
+<option>Loading & Unloading</option>
+<option>Construction Labour</option>
+<option>Cement & Construction Materials</option>
+<option>Sanitary & Bathroom Supplies</option>
+<option>Wood / Timber & Boards</option>
+<option>Paints & Painting Supplies</option>
+<option>Electrical Materials</option>
+<option>Hardware & Fittings</option>
+<option>Tools & Site Supplies</option>
+<option>Other Building Supplies</option>
+</select>
+<select id="areaFilter">
+<option value="">All Areas</option>
+<option>Karnal</option>
+<option>Panipat</option>
+<option>Ambala</option>
+<option>Kurukshetra</option>
+<option>Kaithal</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="results-head">
+<h2 id="resultsTitle">Jobs & Requirements</h2>
+<small id="resultsCount">Loading...</small>
+</div>
+
+<div id="resultsList" class="list">
+<div class="loading"><div class="spinner"></div>Loading live data from VAA...</div>
+</div>
+
+<div style="text-align:center;margin-top:30px">
+<a class="btn primary" href="index.html">+ Post Your Own Requirement</a>
+</div>
+
+</div></section>
+
+<footer><div class="container foot">
+<div><b class="yellow">VAA</b> — Skilled Hands | Stronger Tomorrow</div>
+<div>Call <a href="tel:9671163712">9671163712</a> · <a href="tel:7015551866">70155 51866</a> &nbsp;|&nbsp; <a href="https://wa.me/919671163712">WhatsApp</a> · <a href="https://instagram.com/vaa_enterprises" target="_blank">Instagram</a></div>
+</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ===== SUPABASE ===== */
+const SUPABASE_URL = "https://gynphsibkcrivosuamxp.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5bnBoc2lia2NyaXZvc3VhbXhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4OTA0NzQsImV4cCI6MjEwNTQ2NjQ3NH0.GNKrZgJFj4496-kPzfdc2Fzv3bS8YO6CLrWPV4PyucM";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ===== STATE ===== */
+let currentTab = "jobs";
+let allJobs = [];
+let allListings = [];
+
+/* ===== HELPERS ===== */
+function esc(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function stripDigits(s){return String(s||"").replace(/[^0-9]/g,"")}
+
+/* ===== LOAD DATA ===== */
+async function loadData(){
+  const listEl = document.getElementById("resultsList");
+  listEl.innerHTML = '<div class="loading"><div class="spinner"></div>Loading live data from VAA...</div>';
+
+  try {
+    const jobsReq = sb.from("vaa_jobs").select("*").order("created", { ascending: false });
+    const listReq = sb.from("vaa_listings").select("*").order("created", { ascending: false });
+    const [jobsRes, listRes] = await Promise.all([jobsReq, listReq]);
+
+    if (jobsRes.error) console.error("jobs error:", jobsRes.error);
+    if (listRes.error) console.error("listings error:", listRes.error);
+
+    allJobs = jobsRes.data || [];
+    allListings = listRes.data || [];
+
+    render();
+  } catch (err) {
+    console.error("Load failed:", err);
+    listEl.innerHTML = '<div class="empty"><span class="big">⚠️</span><b>Could not load data</b>Please try again in a moment.</div>';
+  }
+}
+
+/* ===== RENDER ===== */
+function render(){
+  const listEl = document.getElementById("resultsList");
+  const titleEl = document.getElementById("resultsTitle");
+  const countEl = document.getElementById("resultsCount");
+
+  const q = (document.getElementById("searchInput").value || "").toLowerCase().trim();
+  const cat = document.getElementById("catFilter").value;
+  const area = document.getElementById("areaFilter").value;
+
+  const items = currentTab === "jobs" ? allJobs : allListings;
+
+  const filtered = items.filter(item => {
+    if (cat && item.category !== cat) return false;
+    const itemArea = (item.location || item.area || "").toLowerCase();
+    if (area && !itemArea.includes(area.toLowerCase())) return false;
+    if (q) {
+      const hay = [
+        item.name, item.phone, item.category, item.location, item.area,
+        item.details, item.product, item.budget, item.duration, item.price
+      ].filter(Boolean).join(" ").toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  titleEl.textContent = currentTab === "jobs" ? "Jobs & Requirements" : "Material Listings";
+  countEl.textContent = filtered.length + " " + (filtered.length === 1 ? "result" : "results") + " • " + items.length + " total";
+
+  if (filtered.length === 0) {
+    listEl.innerHTML = '<div class="empty"><span class="big">' + (currentTab === "jobs" ? "📋" : "🧱") + '</span><b>No ' + (currentTab === "jobs" ? "jobs" : "listings") + ' found</b>' + (items.length === 0 ? 'Be the first to post one from the homepage.' : 'Try changing your filters.') + '</div>';
+    return;
+  }
+
+  if (currentTab === "jobs") {
+    listEl.innerHTML = filtered.map(j => {
+      const phone = stripDigits(j.phone);
+      return `<div class="job-card">
+        <div>
+          <h3>👷 ${esc(j.category || "Job")} — ${esc(j.count || "1")} worker(s)</h3>
+          <div class="job-meta">
+            <b>${esc(j.name || "Customer")}</b> · 📍 ${esc(j.location || "Karnal")}<br>
+            ${j.duration ? "⏱ " + esc(j.duration) + " · " : ""}${j.budget ? "💰 " + esc(j.budget) + " · " : ""}${j.date ? "📅 " + esc(j.date) + " · " : ""}<span class="tag open">${esc(j.status || "Open")}</span>
+            ${j.details ? "<br>" + esc(j.details) : ""}
+          </div>
+        </div>
+        <div class="job-actions">
+          <a class="btn primary btn-sm" href="tel:${esc(j.phone)}">Call</a>
+          <a class="btn darkbtn btn-sm" href="https://wa.me/91${phone}" target="_blank">WhatsApp</a>
+        </div>
+      </div>`;
+    }).join("");
+  } else {
+    listEl.innerHTML = filtered.map(l => {
+      const phone = stripDigits(l.phone);
+      return `<div class="job-card">
+        <div>
+          <h3>🧱 ${esc(l.product || "Material")}</h3>
+          <div class="job-meta">
+            <b>${esc(l.name || "Supplier")}</b> · 📍 ${esc(l.area || "Karnal")} · ${esc(l.category || "")}<br>
+            ${l.price ? "💰 " + esc(l.price) + " · " : ""}<span class="tag list">Listing</span>
+            ${l.details ? "<br>" + esc(l.details) : ""}
+          </div>
+        </div>
+        <div class="job-actions">
+          <a class="btn primary btn-sm" href="tel:${esc(l.phone)}">Call</a>
+          <a class="btn darkbtn btn-sm" href="https://wa.me/91${phone}" target="_blank">WhatsApp</a>
+        </div>
+      </div>`;
+    }).join("");
+  }
+}
+
+/* ===== EVENTS ===== */
+document.querySelectorAll(".tab").forEach(t => {
+  t.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+    t.classList.add("active");
+    currentTab = t.dataset.tab;
+    render();
+  });
+});
+document.getElementById("searchInput").addEventListener("input", render);
+document.getElementById("catFilter").addEventListener("change", render);
+document.getElementById("areaFilter").addEventListener("change", render);
+
+/* ===== PAGE TRANSITION ===== */
+document.addEventListener("click", (e) => {
+  const link = e.target.closest("a");
+  if (!link) return;
+  const href = link.getAttribute("href");
+  if (!href || href.startsWith("#") || href.startsWith("tel:") || href.startsWith("http") || href.startsWith("mailto")) return;
+  e.preventDefault();
+  document.body.classList.add("page-out");
+  setTimeout(() => { window.location.href = href; }, 320);
+});
+
+/* ===== SCROLL REVEAL ===== */
+(function(){
+  const targets = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)){ targets.forEach(t => t.classList.add("in")); return; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  targets.forEach(t => io.observe(t));
+})();
+
+/* ===== INIT ===== */
+loadData();
+setInterval(loadData, 60000); /* refresh every 60s */
+</script>
+</body>
+  </html>

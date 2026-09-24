@@ -334,5 +334,144 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
+  <!-- ===== VAA AI CHAT WIDGET ===== -->
+<div id="vaaChatBtn" onclick="toggleChat()">
+  <span id="vaaChatIcon">💬</span>
+  <span id="vaaChatBadge">AI</span>
+</div>
+
+<div id="vaaChatBox">
+  <div id="vaaChatHeader">
+    <div>
+      <b>VAA Assistant</b>
+      <small>Powered by AI · Always online</small>
+    </div>
+    <button onclick="toggleChat()">✕</button>
+  </div>
+  <div id="vaaChatMessages">
+    <div class="vaa-msg vaa-bot">Namaste! 🙏 Main VAA ka AI assistant hoon. Aap workers, materials, ya rates ke baare mein kuch bhi pooch sakte hain.</div>
+  </div>
+  <form id="vaaChatForm" onsubmit="sendChat(event)">
+    <input id="vaaChatInput" placeholder="Type your message..." autocomplete="off" required>
+    <button type="submit">➤</button>
+  </form>
+</div>
+
+<style>
+#vaaChatBtn{position:fixed;bottom:22px;right:22px;width:60px;height:60px;border-radius:50%;background:#ffd400;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9998;box-shadow:0 10px 30px rgba(255,212,0,.5);font-size:26px;transition:transform .2s ease,box-shadow .3s ease}
+#vaaChatBtn:hover{transform:scale(1.08);box-shadow:0 14px 40px rgba(255,212,0,.7)}
+#vaaChatBadge{position:absolute;top:-3px;right:-3px;background:#0b1117;color:#ffd400;font-size:10px;font-weight:900;padding:3px 6px;border-radius:99px;letter-spacing:.5px}
+#vaaChatBox{position:fixed;bottom:95px;right:22px;width:min(380px,92vw);height:min(560px,80vh);background:#0b1117;border:1px solid #252d36;border-radius:20px;display:none;flex-direction:column;overflow:hidden;z-index:9999;box-shadow:0 25px 60px rgba(0,0,0,.6);animation:vaaChatIn .3s ease}
+@keyframes vaaChatIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+#vaaChatBox.open{display:flex}
+#vaaChatHeader{background:linear-gradient(135deg,#17212b,#0f171f);color:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #252d36}
+#vaaChatHeader b{font-size:15px;display:block}
+#vaaChatHeader small{color:#9da7b2;font-size:11px}
+#vaaChatHeader button{background:transparent;border:0;color:#9da7b2;font-size:18px;cursor:pointer;padding:6px}
+#vaaChatMessages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#0b1117}
+.vaa-msg{max-width:82%;padding:11px 14px;border-radius:14px;font-size:13.5px;line-height:1.55;word-wrap:break-word}
+.vaa-bot{background:#17212b;color:#e5e9ee;border-bottom-left-radius:4px;align-self:flex-start}
+.vaa-user{background:#ffd400;color:#101010;border-bottom-right-radius:4px;align-self:flex-end;font-weight:600}
+.vaa-typing{background:#17212b;color:#9da7b2;align-self:flex-start;padding:12px 16px;border-radius:14px;font-size:13px}
+.vaa-typing::after{content:"...";animation:vaaDots 1.2s infinite}
+@keyframes vaaDots{0%,20%{content:"."}40%{content:".."}60%,100%{content:"..."}}
+#vaaChatForm{display:flex;gap:8px;padding:12px;background:#17212b;border-top:1px solid #252d36}
+#vaaChatInput{flex:1;padding:12px 14px;border:1px solid #2a3540;border-radius:11px;background:#0f171f;color:white;font:inherit;font-size:14px}
+#vaaChatInput:focus{outline:none;border-color:#ffd400}
+#vaaChatForm button{background:#ffd400;color:#101010;border:0;border-radius:11px;padding:0 18px;font-weight:900;font-size:16px;cursor:pointer}
+#vaaChatForm button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:600px){#vaaChatBtn{bottom:16px;right:16px;width:54px;height:54px;font-size:22px}#vaaChatBox{bottom:82px;right:8px;left:8px;width:auto}}
+</style>
+
+<script>
+/* ====== VAA AI CHAT WIDGET ====== */
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5bnBoc2lia2NyaXZvc3VhbXhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4OTA0NzQsImV4cCI6MjEwNTQ2NjQ3NH0.GNKrZgJFj4496-kPzfdc2Fzv3bS8YO6CLrWPV4PyucM";
+const CHAT_FN_URL = "https://gynphsibkcrivosuamxp.supabase.co/functions/v1/chat";
+
+let chatHistory = [];
+
+function toggleChat(){
+  const box = document.getElementById("vaaChatBox");
+  box.classList.toggle("open");
+  if (box.classList.contains("open")) {
+    document.getElementById("vaaChatInput").focus();
+  }
+}
+
+function addMsg(text, cls){
+  const wrap = document.getElementById("vaaChatMessages");
+  const div = document.createElement("div");
+  div.className = "vaa-msg " + cls;
+  div.textContent = text;
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+  return div;
+}
+
+function addTyping(){
+  const wrap = document.getElementById("vaaChatMessages");
+  const div = document.createElement("div");
+  div.className = "vaa-typing";
+  div.id = "vaaTyping";
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function removeTyping(){
+  const t = document.getElementById("vaaTyping");
+  if (t) t.remove();
+}
+
+async function sendChat(e){
+  e.preventDefault();
+  const input = document.getElementById("vaaChatInput");
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMsg(text, "vaa-user");
+  input.value = "";
+  input.disabled = true;
+  document.querySelector("#vaaChatForm button").disabled = true;
+  addTyping();
+
+  chatHistory.push({ role: "user", parts: [{ text: text }] });
+
+  try {
+    const res = await fetch(CHAT_FN_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + SUPABASE_ANON,
+        "apikey": SUPABASE_ANON
+      },
+      body: JSON.stringify({ messages: chatHistory })
+    });
+
+    const data = await res.json();
+    removeTyping();
+
+    if (!res.ok) {
+      console.error("Chat error:", data);
+      addMsg("Sorry, connection issue. Please call 9671163712 directly.", "vaa-bot");
+      return;
+    }
+
+    const reply = data?.reply || "Sorry, main samajh nahi paya. Please call 9671163712.";
+    addMsg(reply, "vaa-bot");
+    chatHistory.push({ role: "model", parts: [{ text: reply }] });
+
+    if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
+  } catch (err) {
+    console.error(err);
+    removeTyping();
+    addMsg("Network issue. Please call 9671163712 directly.", "vaa-bot");
+  } finally {
+    input.disabled = false;
+    document.querySelector("#vaaChatForm button").disabled = false;
+    input.focus();
+  }
+}
+</script>
+<!-- ===== END VAA AI CHAT WIDGET ===== -->
 </body>
   </html>

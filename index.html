@@ -568,5 +568,172 @@ function tick(){
 </main></div></section>
 
 <script>renderDashboard();</script>
+  <!-- ===== VAA AI CHAT WIDGET ===== -->
+<div id="vaaChatBtn" onclick="toggleChat()">
+  <span id="vaaChatIcon">💬</span>
+  <span id="vaaChatBadge">AI</span>
+</div>
+
+<div id="vaaChatBox">
+  <div id="vaaChatHeader">
+    <div>
+      <b>VAA Assistant</b>
+      <small>Powered by AI · Always online</small>
+    </div>
+    <button onclick="toggleChat()">✕</button>
+  </div>
+  <div id="vaaChatMessages">
+    <div class="vaa-msg vaa-bot">Namaste! 🙏 Main VAA ka AI assistant hoon. Aap workers, materials, ya rates ke baare mein kuch bhi pooch sakte hain.</div>
+  </div>
+  <form id="vaaChatForm" onsubmit="sendChat(event)">
+    <input id="vaaChatInput" placeholder="Type your message..." autocomplete="off" required>
+    <button type="submit">➤</button>
+  </form>
+</div>
+
+<style>
+#vaaChatBtn{position:fixed;bottom:22px;right:22px;width:60px;height:60px;border-radius:50%;background:#ffd400;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9998;box-shadow:0 10px 30px rgba(255,212,0,.5);font-size:26px;transition:transform .2s ease,box-shadow .3s ease}
+#vaaChatBtn:hover{transform:scale(1.08);box-shadow:0 14px 40px rgba(255,212,0,.7)}
+#vaaChatBadge{position:absolute;top:-3px;right:-3px;background:#0b1117;color:#ffd400;font-size:10px;font-weight:900;padding:3px 6px;border-radius:99px;letter-spacing:.5px}
+#vaaChatBox{position:fixed;bottom:95px;right:22px;width:min(380px,92vw);height:min(560px,80vh);background:#0b1117;border:1px solid #252d36;border-radius:20px;display:none;flex-direction:column;overflow:hidden;z-index:9999;box-shadow:0 25px 60px rgba(0,0,0,.6);animation:vaaChatIn .3s ease}
+@keyframes vaaChatIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+#vaaChatBox.open{display:flex}
+#vaaChatHeader{background:linear-gradient(135deg,#17212b,#0f171f);color:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #252d36}
+#vaaChatHeader b{font-size:15px;display:block}
+#vaaChatHeader small{color:#9da7b2;font-size:11px}
+#vaaChatHeader button{background:transparent;border:0;color:#9da7b2;font-size:18px;cursor:pointer;padding:6px}
+#vaaChatMessages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#0b1117}
+.vaa-msg{max-width:82%;padding:11px 14px;border-radius:14px;font-size:13.5px;line-height:1.55;word-wrap:break-word}
+.vaa-bot{background:#17212b;color:#e5e9ee;border-bottom-left-radius:4px;align-self:flex-start}
+.vaa-user{background:#ffd400;color:#101010;border-bottom-right-radius:4px;align-self:flex-end;font-weight:600}
+.vaa-typing{background:#17212b;color:#9da7b2;align-self:flex-start;padding:12px 16px;border-radius:14px;font-size:13px}
+.vaa-typing::after{content:"...";animation:vaaDots 1.2s infinite}
+@keyframes vaaDots{0%,20%{content:"."}40%{content:".."}60%,100%{content:"..."}}
+#vaaChatForm{display:flex;gap:8px;padding:12px;background:#17212b;border-top:1px solid #252d36}
+#vaaChatInput{flex:1;padding:12px 14px;border:1px solid #2a3540;border-radius:11px;background:#0f171f;color:white;font:inherit;font-size:14px}
+#vaaChatInput:focus{outline:none;border-color:#ffd400}
+#vaaChatForm button{background:#ffd400;color:#101010;border:0;border-radius:11px;padding:0 18px;font-weight:900;font-size:16px;cursor:pointer}
+#vaaChatForm button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:600px){#vaaChatBtn{bottom:16px;right:16px;width:54px;height:54px;font-size:22px}#vaaChatBox{bottom:82px;right:8px;left:8px;width:auto}}
+</style>
+
+<script>
+/* ====== VAA AI CHAT WIDGET ====== */
+/* PASTE YOUR GEMINI API KEY BELOW — replace PASTE_YOUR_KEY_HERE */
+const GEMINI_KEY = "PASTE_YOUR_KEY_HERE";
+const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+
+const VAA_SYSTEM = `You are the AI assistant for VAA (Workforce & Marketplace), a Karnal-based platform connecting customers, workers, professionals, and building material suppliers.
+
+YOUR ROLE:
+- Answer questions about VAA's services, rates, and contact info
+- Reply in a friendly Hinglish mix (Hindi + English) — same as how locals speak
+- Keep replies SHORT (2-4 lines max). People are on mobile.
+- Use emojis sparingly (1-2 max per reply)
+
+VAA SERVICES & RATES:
+- General Labour: ₹800/head + ₹25 VAA fee = ₹825 total per head
+- Mistri (Mason): ₹1,200/head + ₹30 VAA fee = ₹1,230 total per head
+- Electrician, Plumber, Carpenter, Painter, Loading/Unloading, Construction Labour: Rate on enquiry (call to confirm)
+- Materials (cement, sanitary, wood, paints, electrical, hardware, tools): Delivered to doorstep. Delivery charges vary by order — confirmed on call.
+
+CONTACT:
+- Call/WhatsApp: 9671163712 or 70155 51866
+- Location: Karnal, Haryana (serving Karnal and nearby areas)
+- Instagram: @vaa_enterprises
+
+RULES:
+1. If someone wants to book a worker or order materials, ask for their NAME, PHONE, and AREA. Then say: "Hum aapko 10 minute mein call karenge. Ya aap direct call kar sakte hain: 9671163712"
+2. If you're unsure about anything (specific pricing, availability, coverage outside Karnal), say: "Iske liye please call karein 9671163712 — team aapko exact details de degi."
+3. NEVER make up information. NEVER promise rates or services VAA doesn't offer.
+4. NEVER discuss topics unrelated to VAA (politics, other companies, personal advice). Politely redirect.
+5. If someone speaks English, reply in English. If they speak Hindi/Hinglish, reply in Hinglish.
+6. Be warm, respectful, and use "aap" not "tum".`;
+
+let chatHistory = [];
+
+function toggleChat(){
+  const box = document.getElementById("vaaChatBox");
+  box.classList.toggle("open");
+  if (box.classList.contains("open")) {
+    document.getElementById("vaaChatInput").focus();
+  }
+}
+
+function addMsg(text, cls){
+  const wrap = document.getElementById("vaaChatMessages");
+  const div = document.createElement("div");
+  div.className = "vaa-msg " + cls;
+  div.textContent = text;
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+  return div;
+}
+
+function addTyping(){
+  const wrap = document.getElementById("vaaChatMessages");
+  const div = document.createElement("div");
+  div.className = "vaa-typing";
+  div.id = "vaaTyping";
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function removeTyping(){
+  const t = document.getElementById("vaaTyping");
+  if (t) t.remove();
+}
+
+async function sendChat(e){
+  e.preventDefault();
+  const input = document.getElementById("vaaChatInput");
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMsg(text, "vaa-user");
+  input.value = "";
+  input.disabled = true;
+  document.querySelector("#vaaChatForm button").disabled = true;
+  addTyping();
+
+  chatHistory.push({ role: "user", parts: [{ text: text }] });
+
+  try {
+    const res = await fetch(GEMINI_URL + "?key=" + GEMINI_KEY, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: VAA_SYSTEM }] },
+        contents: chatHistory,
+        generationConfig: { temperature: 0.7, maxOutputTokens: 300 }
+      })
+    });
+
+    const data = await res.json();
+    removeTyping();
+
+    if (!res.ok) {
+      console.error("Gemini error:", data);
+      addMsg("Sorry, connection issue. Please call 9671163712 directly.", "vaa-bot");
+      return;
+    }
+
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, main samajh nahi paya. Please call 9671163712.";
+    addMsg(reply, "vaa-bot");
+    chatHistory.push({ role: "model", parts: [{ text: reply }] });
+
+    if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
+  } catch (err) {
+    console.error(err);
+    removeTyping();
+    addMsg("Network issue. Please call 9671163712 directly.", "vaa-bot");
+  } finally {
+    input.disabled = false;
+    document.querySelector("#vaaChatForm button").disabled = false;
+    input.focus();
+  }
+}
+</script>
+<!-- ===== END VAA AI CHAT WIDGET ===== -->
 </body>
 </html>

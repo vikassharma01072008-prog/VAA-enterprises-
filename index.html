@@ -620,8 +620,8 @@ function tick(){
 <script>
 /* ====== VAA AI CHAT WIDGET ====== */
 /* PASTE YOUR GEMINI API KEY BELOW — replace PASTE_YOUR_KEY_HERE */
-const GEMINI_KEY = "PASTE_YOUR_KEY_HERE";
-const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5bnBoc2lia2NyaXZvc3VhbXhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4OTA0NzQsImV4cCI6MjEwNTQ2NjQ3NH0.GNKrZgJFj4496-kPzfdc2Fzv3bS8YO6CLrWPV4PyucM";
+const CHAT_FN_URL = "https://gynphsibkcrivosuamxp.supabase.co/functions/v1/chat";
 
 const VAA_SYSTEM = `You are the AI assistant for VAA (Workforce & Marketplace), a Karnal-based platform connecting customers, workers, professionals, and building material suppliers.
 
@@ -699,15 +699,15 @@ async function sendChat(e){
   chatHistory.push({ role: "user", parts: [{ text: text }] });
 
   try {
-    const res = await fetch(GEMINI_URL + "?key=" + GEMINI_KEY, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: VAA_SYSTEM }] },
-        contents: chatHistory,
-        generationConfig: { temperature: 0.7, maxOutputTokens: 300 }
-      })
-    });
+    const res = await fetch(CHAT_FN_URL, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + SUPABASE_ANON,
+    "apikey": SUPABASE_ANON
+  },
+  body: JSON.stringify({ messages: chatHistory })
+});
 
     const data = await res.json();
     removeTyping();

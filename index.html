@@ -719,7 +719,7 @@ async function sendChat(e){
       return;
     }
 
-    const reply = data?.reply || data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, main samajh nahi paya. Please call 9671163712.";
+   const reply = data?.reply || data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, main samajh nahi paya. Please call 9671163712.";
     addMsg(reply, "vaa-bot");
     chatHistory.push({ role: "model", parts: [{ text: reply }] });
 
